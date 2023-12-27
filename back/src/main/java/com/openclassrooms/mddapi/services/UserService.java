@@ -65,7 +65,6 @@ public class UserService {
 
         newUser.setPassword(passwordEncoder.encode(registerRequest.getPassword()));
 
-
         userRepository.save(newUser);
 
         return jwtUtils.generateToken(newUser.getEmail());
