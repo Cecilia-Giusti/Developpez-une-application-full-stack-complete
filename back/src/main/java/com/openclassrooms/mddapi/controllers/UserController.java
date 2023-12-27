@@ -1,6 +1,8 @@
 package com.openclassrooms.mddapi.controllers;
 
 import com.openclassrooms.mddapi.models.User;
+import com.openclassrooms.mddapi.paylod.request.UserRequest;
+import com.openclassrooms.mddapi.paylod.response.MessageResponse;
 import com.openclassrooms.mddapi.paylod.response.UserResponse;
 import com.openclassrooms.mddapi.services.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.time.ZoneId;
 
 
@@ -47,6 +50,17 @@ public class UserController {
             userResponse.setUpdated_at(null);
         }
         return ResponseEntity.ok(userResponse);
+    }
+
+    //Questions
+    // Vaut il mieux retourner le profil mis à jour
+    // ou il est préférable en front de faire un get après le put ?
+    @PutMapping("/profile")
+    public ResponseEntity<MessageResponse> updateUser(@RequestBody UserRequest userRequest) {
+        User user = userService.updateUser(userRequest);
+
+        MessageResponse response = new MessageResponse("Profile updated !");
+        return ResponseEntity.ok(response);
     }
 }
 

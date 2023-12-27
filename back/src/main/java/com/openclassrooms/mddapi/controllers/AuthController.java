@@ -3,7 +3,7 @@ package com.openclassrooms.mddapi.controllers;
 import com.openclassrooms.mddapi.paylod.request.LoginRequest;
 import com.openclassrooms.mddapi.paylod.request.RegisterRequest;
 import com.openclassrooms.mddapi.paylod.response.JwtResponse;
-import com.openclassrooms.mddapi.services.UserService;
+import com.openclassrooms.mddapi.services.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ import javax.validation.Valid;
 public class AuthController {
 
     @Autowired
-    private UserService userService;
+    private AuthService authService;
 
 
     /**
@@ -33,7 +33,7 @@ public class AuthController {
      */
     @PostMapping("/register")
     public ResponseEntity<JwtResponse> createUser(@RequestBody @Valid RegisterRequest registerRequest) {
-        String token = userService.registerUser(registerRequest);
+        String token = authService.registerUser(registerRequest);
         JwtResponse jwtResponse = new JwtResponse(token);
         return ResponseEntity.ok(jwtResponse);
     }
@@ -46,7 +46,7 @@ public class AuthController {
      */
     @PostMapping("/login")
     public ResponseEntity<JwtResponse> loginUser(@RequestBody LoginRequest loginRequest) {
-        String token = userService.loginUser(loginRequest);
+        String token = authService.loginUser(loginRequest);
         JwtResponse jwtResponse = new JwtResponse(token);
         return ResponseEntity.ok(jwtResponse);
     }
