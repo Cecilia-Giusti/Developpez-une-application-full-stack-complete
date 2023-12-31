@@ -1,10 +1,6 @@
 package com.openclassrooms.mddapi.controllers;
 
-import com.openclassrooms.mddapi.dto.SubscriptionDto;
-import com.openclassrooms.mddapi.models.Subscription;
 import com.openclassrooms.mddapi.models.User;
-import com.openclassrooms.mddapi.paylod.request.RegisterRequest;
-import com.openclassrooms.mddapi.paylod.request.SubscriptionRequest;
 import com.openclassrooms.mddapi.paylod.response.MessageResponse;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import com.openclassrooms.mddapi.services.SubscriptionService;
@@ -15,8 +11,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -36,7 +30,7 @@ public class SubscriptionController {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
 
-        List<Integer> themeIds = subscriptionService.getThemeIdsForCurrentUser(userEmail);
+        List<Integer> themeIds = subscriptionService.getThemeIdsForCurrentUser(user.getId());
         return ResponseEntity.ok(themeIds);
     }
 
