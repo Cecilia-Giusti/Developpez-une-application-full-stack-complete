@@ -3,6 +3,7 @@ package com.openclassrooms.mddapi.controllers;
 import com.openclassrooms.mddapi.models.Article;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.paylod.request.ArticleRequest;
+import com.openclassrooms.mddapi.paylod.response.ArticleResponse;
 import com.openclassrooms.mddapi.paylod.response.MessageResponse;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import com.openclassrooms.mddapi.services.ArticlesService;
@@ -28,14 +29,15 @@ public class ArticlesController {
     private ArticlesService articlesService;
 
     @GetMapping
-    public ResponseEntity<List<Article>> getArticlesForCurrentUser(Authentication authentication) {
+    public ResponseEntity<List<ArticleResponse>> getArticlesForCurrentUser(Authentication authentication) {
         String userEmail = authentication.getName();
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
 
-        List<Article> articles = articlesService.getArticlesForCurrentUser(user.getId());
-        return ResponseEntity.ok(articles);
+        List<ArticleResponse> articleResponses = articlesService.getArticlesForCurrentUser(user.getId());
+        return ResponseEntity.ok(articleResponses);
     }
+
 
     @PostMapping
     public ResponseEntity<MessageResponse> createArticle(@Valid @RequestBody ArticleRequest articleRequest, Authentication authentication) {
@@ -45,5 +47,11 @@ public class ArticlesController {
 
         MessageResponse response = new MessageResponse("Your article are edited");
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{articleId}")
+    public ResponseEntity<ArticleResponse> getArticleById(@PathVariable Integer articleId) {
+        ArticleResponse articleResponse = articlesService.getArticleById(articleId);
+        return ResponseEntity.ok(articleResponse);
     }
 }

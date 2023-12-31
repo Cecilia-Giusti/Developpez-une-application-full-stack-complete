@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ArticlesService {
@@ -36,9 +37,14 @@ public class ArticlesService {
         return articleRepository.findByThemeIdIn(themeIds);
     }
 
-    public List<Article> getArticlesForCurrentUser(Integer userId) {
+    public List<ArticleResponse> getArticlesForCurrentUser(Integer userId) {
         List<Integer> themeIds = subscriptionRepository.findThemeIdsByUserId(userId);
-        return articleRepository.findByThemeIdIn(themeIds);
+
+        List<Article> articles = articleRepository.findByThemeIdIn(themeIds);
+
+        return articles.stream()
+                .map(ArticleResponse::new)
+                .collect(Collectors.toList());
     }
 
     public void createArticle(ArticleRequest articleRequest, String userEmail) {
@@ -58,6 +64,13 @@ public class ArticlesService {
         Article savedArticle = articleRepository.save(article);
 
         new ArticleResponse(savedArticle);
+    }
+
+    public ArticleResponse getArticleById(Integer articleId) {
+        Article article = articleRepository.findById(articleId)
+                .orElseThrow(() -> new EntityNotFoundException("Article not found with ID: " + articleId));
+
+        return new ArticleResponse(article);
     }
 
 }
