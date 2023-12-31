@@ -1,7 +1,5 @@
 package com.openclassrooms.mddapi.services;
 
-
-import com.openclassrooms.mddapi.dto.SubscriptionDto;
 import com.openclassrooms.mddapi.models.Subscription;
 import com.openclassrooms.mddapi.models.Theme;
 import com.openclassrooms.mddapi.models.User;
@@ -15,7 +13,6 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class SubscriptionService {
@@ -29,11 +26,8 @@ public class SubscriptionService {
     @Autowired
     private ThemeRepository themeRepository;
 
-    public List<Integer> getThemeIdsForCurrentUser(String userEmail) {
-        User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
-
-        return subscriptionRepository.findThemeIdsByUserId(user.getId());
+    public List<Integer> getThemeIdsForCurrentUser(Integer userId) {
+        return subscriptionRepository.findThemeIdsByUserId(userId);
     }
 
     public void createSubscription(Integer userId, Integer themeId) {

@@ -2,16 +2,21 @@ package com.openclassrooms.mddapi.paylod.response;
 
 
 import com.openclassrooms.mddapi.models.Theme;
+import lombok.Getter;
 
 import java.util.List;
 
 /**
  * Represents the structure of the response returned when fetching themes.
  */
+@Getter
 public class ThemesResponse {
 
     /**
      * List of theme returned in the response.
+     * -- GETTER --
+     *  Retrieves the list of themes.
+     *
      */
     private List<Theme> themes;
 
@@ -22,15 +27,6 @@ public class ThemesResponse {
      */
     public ThemesResponse(List<Theme> themes) {
         this.themes = themes;
-    }
-
-    /**
-     * Retrieves the list of themes.
-     *
-     * @return A list of Theme objects.
-     */
-    public List<Theme> getThemes() {
-        return themes;
     }
 
     /**
