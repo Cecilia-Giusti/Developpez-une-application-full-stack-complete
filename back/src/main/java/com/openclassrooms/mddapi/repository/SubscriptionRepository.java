@@ -14,4 +14,6 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Inte
     List<Integer> findThemeIdsByUserId(Integer userId);
 
     Optional<Subscription> findByUserIdAndThemeId(Integer userId, Integer themeId);
+
+    boolean existsByUserIdAndThemeId(Integer userId, Integer themeId);
 }
