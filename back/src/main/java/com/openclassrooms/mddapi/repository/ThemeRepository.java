@@ -5,6 +5,7 @@ import com.openclassrooms.mddapi.models.Theme;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import javax.validation.constraints.NotNull;
+import java.util.Optional;
 
 /**
  * Repository interface for CRUD operations on RentalModel entities.
@@ -20,4 +21,5 @@ public interface ThemeRepository extends JpaRepository<Theme, Integer> {
      * @return The RentalModel entity corresponding to the given ID.
      */
     @NotNull Theme getById(@NotNull Integer id);
+    Optional<Theme> findById(Integer id);
 }
