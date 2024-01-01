@@ -1,5 +1,7 @@
 package com.openclassrooms.mddapi.services;
 
+import com.openclassrooms.mddapi.exceptions.NoArticlesFoundException;
+import com.openclassrooms.mddapi.exceptions.NoSubscribedThemesException;
 import com.openclassrooms.mddapi.models.Article;
 import com.openclassrooms.mddapi.models.Theme;
 import com.openclassrooms.mddapi.models.User;
@@ -40,12 +42,20 @@ public class ArticlesService {
     public List<ArticleResponse> getArticlesForCurrentUser(Integer userId) {
         List<Integer> themeIds = subscriptionRepository.findThemeIdsByUserId(userId);
 
+        if (themeIds.isEmpty()) {
+            throw new NoSubscribedThemesException("User is not subscribed to any themes");
+        }
+
         List<Article> articles = articleRepository.findByThemeIdIn(themeIds);
+        if (articles.isEmpty()) {
+            throw new NoArticlesFoundException("No articles found for the subscribed themes");
+        }
 
         return articles.stream()
                 .map(ArticleResponse::new)
                 .collect(Collectors.toList());
     }
+
 
     public void createArticle(ArticleRequest articleRequest, String userEmail) {
         User user = userRepository.findByEmail(userEmail)

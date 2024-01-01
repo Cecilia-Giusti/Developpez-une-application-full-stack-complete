@@ -1,10 +1,7 @@
 package com.openclassrooms.mddapi.exceptions.handlers;
 
 
-import com.openclassrooms.mddapi.exceptions.AccountException;
-import com.openclassrooms.mddapi.exceptions.LoginException;
-import com.openclassrooms.mddapi.exceptions.NoSubscribedThemesException;
-import com.openclassrooms.mddapi.exceptions.RegisterException;
+import com.openclassrooms.mddapi.exceptions.*;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -82,6 +79,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NoSubscribedThemesException.class)
     public ResponseEntity<String> handleNoSubscribedThemesException(NoSubscribedThemesException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(NoArticlesFoundException.class)
+    public ResponseEntity<String> handleNoArticlesFoundException(NoArticlesFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 }
