@@ -1,5 +1,5 @@
 
-package com.openclassrooms.mddapi.paylod.response;
+package com.openclassrooms.mddapi.Dto.response;
 
 import lombok.Getter;
 import lombok.Setter;

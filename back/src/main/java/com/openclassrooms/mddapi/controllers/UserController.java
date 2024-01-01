@@ -1,9 +1,9 @@
 package com.openclassrooms.mddapi.controllers;
 
 import com.openclassrooms.mddapi.models.User;
-import com.openclassrooms.mddapi.paylod.request.UserRequest;
-import com.openclassrooms.mddapi.paylod.response.MessageResponse;
-import com.openclassrooms.mddapi.paylod.response.UserResponse;
+import com.openclassrooms.mddapi.Dto.request.UserRequest;
+import com.openclassrooms.mddapi.Dto.response.MessageResponse;
+import com.openclassrooms.mddapi.Dto.response.UserResponse;
 import com.openclassrooms.mddapi.services.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
