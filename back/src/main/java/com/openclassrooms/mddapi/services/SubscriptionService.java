@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.services;
 
 import com.openclassrooms.mddapi.exceptions.NoSubscribedThemesException;
-import com.openclassrooms.mddapi.exceptions.RegisterException;
 import com.openclassrooms.mddapi.models.Subscription;
 import com.openclassrooms.mddapi.models.Theme;
 import com.openclassrooms.mddapi.models.User;
@@ -39,20 +38,26 @@ public class SubscriptionService {
         return themeId;
     }
 
-    public void createSubscription(Integer userId, Integer themeId) {
+    public void createSubscription(String userEmail, Integer themeId) {
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
+
         Theme theme = themeRepository.findById(themeId)
                 .orElseThrow(() -> new EntityNotFoundException("Theme not found with ID: " + themeId));
 
         Subscription subscription = new Subscription();
-        subscription.setUserId(userId);
+        subscription.setUserId(user.getId());
         subscription.setThemeId(theme.getId());
         subscription.setCreatedAt(LocalDateTime.now());
 
         subscriptionRepository.save(subscription);
     }
 
-    public void deleteSubscription(Integer userId, Integer themeId) {
-        Subscription subscription = subscriptionRepository.findByUserIdAndThemeId(userId, themeId)
+    public void deleteSubscription(String userEmail, Integer themeId) {
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
+
+        Subscription subscription = subscriptionRepository.findByUserIdAndThemeId(user.getId(), themeId)
                 .orElseThrow(() -> new EntityNotFoundException("Subscription not found"));
 
         subscriptionRepository.delete(subscription);

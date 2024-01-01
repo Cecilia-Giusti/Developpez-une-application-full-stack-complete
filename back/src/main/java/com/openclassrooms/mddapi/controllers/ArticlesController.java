@@ -1,7 +1,5 @@
 package com.openclassrooms.mddapi.controllers;
 
-import com.openclassrooms.mddapi.models.Article;
-import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.paylod.request.ArticleRequest;
 import com.openclassrooms.mddapi.paylod.response.ArticleResponse;
 import com.openclassrooms.mddapi.paylod.response.MessageResponse;
@@ -12,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -32,10 +29,8 @@ public class ArticlesController {
     @GetMapping
     public ResponseEntity<List<ArticleResponse>> getArticlesForCurrentUser(Authentication authentication) {
         String userEmail = authentication.getName();
-        User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
 
-        List<ArticleResponse> articleResponses = articlesService.getArticlesForCurrentUser(user.getId());
+        List<ArticleResponse> articleResponses = articlesService.getArticlesForCurrentUser(userEmail);
         return ResponseEntity.ok(articleResponses);
     }
 

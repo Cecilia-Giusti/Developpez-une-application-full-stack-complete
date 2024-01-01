@@ -1,22 +1,16 @@
 package com.openclassrooms.mddapi.services;
 
 import com.openclassrooms.mddapi.exceptions.AccountException;
-import com.openclassrooms.mddapi.exceptions.LoginException;
-import com.openclassrooms.mddapi.exceptions.RegisterException;
 import com.openclassrooms.mddapi.exceptions.UserException;
 import com.openclassrooms.mddapi.models.User;
-import com.openclassrooms.mddapi.paylod.request.LoginRequest;
-import com.openclassrooms.mddapi.paylod.request.RegisterRequest;
 import com.openclassrooms.mddapi.paylod.request.UserRequest;
+import com.openclassrooms.mddapi.paylod.response.UserResponse;
 import com.openclassrooms.mddapi.repository.UserRepository;
-import jdk.jshell.spi.ExecutionControl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
+import java.time.ZoneId;
 import java.util.Optional;
 
 /**
@@ -74,6 +68,24 @@ public class UserService {
 
         userRepository.save(oldUser);
         return oldUser;
+    }
+
+    public UserResponse convertToUserResponse(User user) {
+        UserResponse userResponse = new UserResponse();
+        userResponse.setId(String.valueOf(user.getId()));
+        userResponse.setUsername(user.getUsername());
+        userResponse.setEmail(user.getEmail());
+
+        if (user.getCreatedAt() != null) {
+            userResponse.setCreated_at(user.getCreatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+        }
+
+        if (user.getUpdatedAt() != null) {
+            userResponse.setUpdated_at(user.getUpdatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+        } else {
+            userResponse.setUpdated_at(null);
+        }
+        return userResponse;
     }
 
 }

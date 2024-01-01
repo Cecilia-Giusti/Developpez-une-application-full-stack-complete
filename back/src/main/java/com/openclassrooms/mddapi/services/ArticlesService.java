@@ -39,8 +39,11 @@ public class ArticlesService {
         return articleRepository.findByThemeIdIn(themeIds);
     }
 
-    public List<ArticleResponse> getArticlesForCurrentUser(Integer userId) {
-        List<Integer> themeIds = subscriptionRepository.findThemeIdsByUserId(userId);
+    public List<ArticleResponse> getArticlesForCurrentUser(String userEmail) {
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
+
+        List<Integer> themeIds = subscriptionRepository.findThemeIdsByUserId(user.getId());
 
         if (themeIds.isEmpty()) {
             throw new NoSubscribedThemesException("User is not subscribed to any themes");

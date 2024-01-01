@@ -10,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.io.IOException;
-import java.time.ZoneId;
 
 
 /**
@@ -32,23 +29,9 @@ public class UserController {
      * @return A ResponseEntity containing the UserResponse object of the authenticated user.
      */
     @GetMapping("/profile")
-    public ResponseEntity<UserResponse> getUserInfo(HttpServletRequest request) {
+    public ResponseEntity<UserResponse> getUserInfo() {
         User user = userService.getUserInfo();
-
-        UserResponse userResponse = new UserResponse();
-        userResponse.setId(String.valueOf(user.getId()));
-        userResponse.setUsername(user.getUsername());
-        userResponse.setEmail(user.getEmail());
-
-        if (user.getCreatedAt() != null) {
-            userResponse.setCreated_at(user.getCreatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
-        }
-
-        if (user.getUpdatedAt() != null) {
-            userResponse.setUpdated_at(user.getUpdatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
-        } else {
-            userResponse.setUpdated_at(null);
-        }
+        UserResponse userResponse = userService.convertToUserResponse(user);
         return ResponseEntity.ok(userResponse);
     }
 

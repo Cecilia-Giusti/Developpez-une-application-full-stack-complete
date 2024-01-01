@@ -1,9 +1,6 @@
 package com.openclassrooms.mddapi.paylod.request;
 import lombok.Data;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-
 
 @Data
 public class UserRequest {

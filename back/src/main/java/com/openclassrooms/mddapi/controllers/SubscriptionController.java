@@ -1,6 +1,5 @@
 package com.openclassrooms.mddapi.controllers;
 
-import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.paylod.response.MessageResponse;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import com.openclassrooms.mddapi.services.SubscriptionService;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -35,10 +33,8 @@ public class SubscriptionController {
     @PostMapping("/{themeId}")
     public ResponseEntity<MessageResponse> createSubscription(@PathVariable Integer themeId, Authentication authentication) {
         String userEmail = authentication.getName();
-        User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
 
-        subscriptionService.createSubscription(user.getId(), themeId);
+        subscriptionService.createSubscription(userEmail, themeId);
 
         MessageResponse response = new MessageResponse("You are subscribed to this theme");
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
@@ -47,10 +43,8 @@ public class SubscriptionController {
     @DeleteMapping("/{themeId}")
     public ResponseEntity<Void> deleteSubscription(@PathVariable Integer themeId, Authentication authentication) {
         String userEmail = authentication.getName();
-        User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
 
-        subscriptionService.deleteSubscription(user.getId(), themeId);
+        subscriptionService.deleteSubscription(userEmail, themeId);
 
         return ResponseEntity.noContent().build();
     }

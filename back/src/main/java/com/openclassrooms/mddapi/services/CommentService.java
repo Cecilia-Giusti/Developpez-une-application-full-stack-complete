@@ -31,11 +31,14 @@ public class CommentService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<Comment> getCommentsByArticleId(Integer articleId, Integer userId) {
+    public List<Comment> getCommentsByArticleId(Integer articleId, String userEmail) {
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
+
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new EntityNotFoundException("Article not found with ID: " + articleId));
 
-        boolean isSubscribed = subscriptionRepository.existsByUserIdAndThemeId(userId, article.getThemeId());
+        boolean isSubscribed = subscriptionRepository.existsByUserIdAndThemeId(user.getId(), article.getThemeId());
         if (!isSubscribed) {
             throw new AccessDeniedException("User is not subscribed to the theme of this article");
         }
