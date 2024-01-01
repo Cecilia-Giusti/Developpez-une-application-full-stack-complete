@@ -3,12 +3,14 @@ package com.openclassrooms.mddapi.exceptions.handlers;
 
 import com.openclassrooms.mddapi.exceptions.AccountException;
 import com.openclassrooms.mddapi.exceptions.LoginException;
+import com.openclassrooms.mddapi.exceptions.NoSubscribedThemesException;
 import com.openclassrooms.mddapi.exceptions.RegisterException;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -38,6 +40,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         });
 
         return new ResponseEntity<>(errors.toString(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<String> handleUsernameNotFoundException(UsernameNotFoundException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     /**
@@ -71,5 +78,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(LoginException.class)
     public ResponseEntity<String> handleIncorrectLoginException(LoginException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(NoSubscribedThemesException.class)
+    public ResponseEntity<String> handleNoSubscribedThemesException(NoSubscribedThemesException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 }

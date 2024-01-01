@@ -1,5 +1,7 @@
 package com.openclassrooms.mddapi.services;
 
+import com.openclassrooms.mddapi.exceptions.NoSubscribedThemesException;
+import com.openclassrooms.mddapi.exceptions.RegisterException;
 import com.openclassrooms.mddapi.models.Subscription;
 import com.openclassrooms.mddapi.models.Theme;
 import com.openclassrooms.mddapi.models.User;
@@ -26,8 +28,15 @@ public class SubscriptionService {
     @Autowired
     private ThemeRepository themeRepository;
 
-    public List<Integer> getThemeIdsForCurrentUser(Integer userId) {
-        return subscriptionRepository.findThemeIdsByUserId(userId);
+    public List<Integer> getThemeIdsForCurrentUser(String userEmail) {
+        User user = userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
+
+        List<Integer> themeId = subscriptionRepository.findThemeIdsByUserId(user.getId());
+        if(themeId.isEmpty()){
+            throw new NoSubscribedThemesException("User is not subscribed to any themes");
+        }
+        return themeId;
     }
 
     public void createSubscription(Integer userId, Integer themeId) {

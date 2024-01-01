@@ -6,6 +6,7 @@ import com.openclassrooms.mddapi.repository.UserRepository;
 import com.openclassrooms.mddapi.services.SubscriptionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,10 +28,7 @@ public class SubscriptionController {
     @GetMapping
     public ResponseEntity<List<Integer>> getSubscriptionsForCurrentUser(Authentication authentication) {
         String userEmail = authentication.getName();
-        User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
-
-        List<Integer> themeIds = subscriptionService.getThemeIdsForCurrentUser(user.getId());
+        List<Integer> themeIds = subscriptionService.getThemeIdsForCurrentUser(userEmail);
         return ResponseEntity.ok(themeIds);
     }
 
@@ -43,18 +41,17 @@ public class SubscriptionController {
         subscriptionService.createSubscription(user.getId(), themeId);
 
         MessageResponse response = new MessageResponse("You are subscribed to this theme");
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @DeleteMapping("/{themeId}")
-    public ResponseEntity<MessageResponse> deleteSubscription(@PathVariable Integer themeId,Authentication authentication) {
+    public ResponseEntity<Void> deleteSubscription(@PathVariable Integer themeId, Authentication authentication) {
         String userEmail = authentication.getName();
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
 
         subscriptionService.deleteSubscription(user.getId(), themeId);
 
-        MessageResponse response = new MessageResponse("You have unsubscribed from this theme");
-        return ResponseEntity.ok(response);
+        return ResponseEntity.noContent().build();
     }
 }
