@@ -57,7 +57,7 @@ public class AuthService {
     public String registerUser(RegisterRequest registerRequest) {
         Optional<User> existingUser = userRepository.findByEmail(registerRequest.getEmail());
         if (existingUser.isPresent()) {
-            throw new RegisterException("Bad name, email or password");
+            throw new RegisterException("The email address is already in use. Please try different credentials");
         }
         User newUser = new User();
         newUser.setUsername(registerRequest.getUsername());

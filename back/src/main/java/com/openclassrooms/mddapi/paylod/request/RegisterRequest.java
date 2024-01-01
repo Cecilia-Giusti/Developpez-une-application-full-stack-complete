@@ -13,6 +13,7 @@ public class RegisterRequest {
      * This field is mandatory.
      */
     @NotNull(message = "Username cannot be empty")
+    @Pattern(regexp = ".*[a-zA-Z]+.*", message = "Username must contain at least one letter")
     private String username;
 
     /**
