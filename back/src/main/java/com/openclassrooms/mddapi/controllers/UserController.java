@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.IOException;
 import java.time.ZoneId;
 
@@ -28,7 +29,6 @@ public class UserController {
 
     /**
      * Retrieves the details of the currently authenticated user.
-     *
      * @return A ResponseEntity containing the UserResponse object of the authenticated user.
      */
     @GetMapping("/profile")
@@ -56,7 +56,7 @@ public class UserController {
     // Vaut il mieux retourner le profil mis à jour
     // ou il est préférable en front de faire un get après le put ?
     @PutMapping("/profile")
-    public ResponseEntity<MessageResponse> updateUser(@RequestBody UserRequest userRequest) {
+    public ResponseEntity<MessageResponse> updateUser(@RequestBody @Valid UserRequest userRequest) {
         User user = userService.updateUser(userRequest);
 
         MessageResponse response = new MessageResponse("Profile updated !");

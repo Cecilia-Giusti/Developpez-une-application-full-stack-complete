@@ -6,6 +6,7 @@ import com.openclassrooms.mddapi.paylod.response.JwtResponse;
 import com.openclassrooms.mddapi.services.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +36,7 @@ public class AuthController {
     public ResponseEntity<JwtResponse> createUser(@RequestBody @Valid RegisterRequest registerRequest) {
         String token = authService.registerUser(registerRequest);
         JwtResponse jwtResponse = new JwtResponse(token);
-        return ResponseEntity.ok(jwtResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(jwtResponse);
     }
 
     /**
@@ -45,7 +46,7 @@ public class AuthController {
      * @return A ResponseEntity containing the authentication token for the logged-in user.
      */
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> loginUser(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<JwtResponse> loginUser(@RequestBody @Valid LoginRequest loginRequest) {
         String token = authService.loginUser(loginRequest);
         JwtResponse jwtResponse = new JwtResponse(token);
         return ResponseEntity.ok(jwtResponse);

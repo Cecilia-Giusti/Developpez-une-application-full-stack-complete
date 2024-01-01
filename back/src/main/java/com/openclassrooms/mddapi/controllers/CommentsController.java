@@ -3,10 +3,12 @@ package com.openclassrooms.mddapi.controllers;
 import com.openclassrooms.mddapi.models.Comment;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.paylod.request.CommentRequest;
+import com.openclassrooms.mddapi.paylod.response.MessageResponse;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import com.openclassrooms.mddapi.services.CommentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -43,6 +45,8 @@ public class CommentsController {
                                                  Authentication authentication) {
         String userEmail = authentication.getName();
         commentService.addComment(articleId, commentRequest, userEmail);
-        return ResponseEntity.ok("Comment added successfully");
+
+        MessageResponse response = new MessageResponse("Comment added successfully");
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 }

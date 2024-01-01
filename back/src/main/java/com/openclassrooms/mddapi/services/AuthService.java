@@ -57,7 +57,7 @@ public class AuthService {
     public String registerUser(RegisterRequest registerRequest) {
         Optional<User> existingUser = userRepository.findByEmail(registerRequest.getEmail());
         if (existingUser.isPresent()) {
-            throw new RegisterException("Bad name, email or password");
+            throw new RegisterException("The email address is already in use. Please try different credentials");
         }
         User newUser = new User();
         newUser.setUsername(registerRequest.getUsername());
@@ -89,10 +89,10 @@ public class AuthService {
 
                 return jwtUtils.generateToken(user.getEmail());
             } else {
-                throw new LoginException(" Bad token mot de passe non valide");
+                throw new LoginException(" Invalid credentials. Please check your email and password and try again");
             }
         } else {
-            throw new LoginException(" Bad token non enregistré");
+            throw new LoginException("Invalid credentials. Please check your email and password and try again");
         }
     }
 
