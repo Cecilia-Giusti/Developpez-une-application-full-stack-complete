@@ -89,10 +89,10 @@ public class AuthService {
 
                 return jwtUtils.generateToken(user.getEmail());
             } else {
-                throw new LoginException(" Bad token mot de passe non valide");
+                throw new LoginException(" Invalid credentials. Please check your email and password and try again");
             }
         } else {
-            throw new LoginException(" Bad token non enregistré");
+            throw new LoginException("Invalid credentials. Please check your email and password and try again");
         }
     }
 
