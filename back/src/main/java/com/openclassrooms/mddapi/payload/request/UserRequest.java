@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.Dto.request;
+package com.openclassrooms.mddapi.payload.request;
 import lombok.Data;
 import javax.validation.constraints.Email;
 

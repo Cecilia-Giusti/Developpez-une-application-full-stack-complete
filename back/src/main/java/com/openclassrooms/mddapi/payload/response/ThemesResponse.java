@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.Dto.response;
+package com.openclassrooms.mddapi.payload.response;
 
 import com.openclassrooms.mddapi.models.Theme;
 import lombok.Getter;
