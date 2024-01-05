@@ -5,7 +5,7 @@ CREATE TABLE `USERS` (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(255),
     email VARCHAR(255),
-    password_hash VARCHAR(255),
+    password VARCHAR(255),
     created_at DATETIME,
     updated_at DATETIME
 );
@@ -47,7 +47,7 @@ CREATE TABLE `COMMENTS` (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
-INSERT INTO USERS (username, email, password_hash, created_at, updated_at)
+INSERT INTO USERS (username, email, password, created_at, updated_at)
 VALUES
 ('devUser1', 'devuser1@example.com', 'hashed_password1', NOW(), NOW()),
 ('devUser2', 'devuser2@example.com', 'hashed_password2', NOW(), NOW());

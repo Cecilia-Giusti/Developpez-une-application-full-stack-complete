@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Controller for handling requests related to articles.
+ */
 @RestController
 @Slf4j
 @RequestMapping(value = "articles")
@@ -26,25 +29,40 @@ public class ArticlesController {
     @Autowired
     private ArticlesService articlesService;
 
+    /**
+     * Retrieves a list of article responses for the current authenticated user.
+     *
+     * @param authentication The authentication object that contains details about the current user.
+     * @return A ResponseEntity containing a list of ArticleResponse.
+     */
     @GetMapping
     public ResponseEntity<List<ArticleResponse>> getArticlesForCurrentUser(Authentication authentication) {
         String userEmail = authentication.getName();
-
         List<ArticleResponse> articleResponses = articlesService.getArticlesForCurrentUser(userEmail);
         return ResponseEntity.ok(articleResponses);
     }
 
-
+    /**
+     * Creates a new article based on the provided article request and the current authenticated user.
+     *
+     * @param articleRequest The request body containing article data.
+     * @param authentication The authentication object that contains details about the current user.
+     * @return A ResponseEntity with a message response indicating the status.
+     */
     @PostMapping
     public ResponseEntity<MessageResponse> createArticle(@Valid @RequestBody ArticleRequest articleRequest, Authentication authentication) {
         String userEmail = authentication.getName();
-
         articlesService.createArticle(articleRequest, userEmail);
-
-        MessageResponse response = new MessageResponse("Your article are edited");
+        MessageResponse response = new MessageResponse("Your article has been created.");
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    /**
+     * Retrieves an article response by its ID.
+     *
+     * @param articleId The ID of the article to retrieve.
+     * @return A ResponseEntity containing the ArticleResponse.
+     */
     @GetMapping("/{articleId}")
     public ResponseEntity<ArticleResponse> getArticleById(@PathVariable Integer articleId) {
         ArticleResponse articleResponse = articlesService.getArticleById(articleId);

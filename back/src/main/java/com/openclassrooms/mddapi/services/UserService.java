@@ -14,10 +14,9 @@ import java.time.ZoneId;
 import java.util.Optional;
 
 /**
- * Service class responsible for handling user-related operations.
- * This service offers methods for user authentication, registration,
- * and information retrieval using the associated repositories
- * and utility services.
+ * Service class for handling user-related operations.
+ * This service manages user information retrieval, updates, and conversions
+ * to DTOs (Data Transfer Objects) for consistent response structures.
  */
 @Service
 public class UserService {
@@ -36,10 +35,11 @@ public class UserService {
 
 
     /**
-     * Retrieves the information of the user based on the authentication token.
+     * Retrieves the current authenticated user's information.
+     * This method uses the authentication token to identify the user and retrieve their details.
      *
-     * @return The UserInfoModel object of the authenticated user.
-     * @throws AccountException if the user associated with the token is not found.
+     * @return A User object containing the authenticated user's details.
+     * @throws AccountException If the user associated with the token is not found.
      */
     public User getUserInfo() {
         Optional<User> userOptional = authService.getUserByEmailFromToken();
@@ -51,7 +51,14 @@ public class UserService {
         }
     }
 
-
+    /**
+     * Updates the user's profile information based on the provided request data.
+     * This method allows for updating the username and/or email of the user.
+     *
+     * @param userRequest The request containing the new user details.
+     * @return The updated User object.
+     * @throws UserException If the email is already in use by another account.
+     */
     public User updateUser(UserRequest userRequest) throws UserException {
         User oldUser = getUserInfo();
 
@@ -70,6 +77,14 @@ public class UserService {
         return oldUser;
     }
 
+    /**
+     * Converts a User entity to a UserResponse DTO.
+     * This method is used to prepare the User object for API responses, ensuring
+     * a consistent data structure is sent to the client.
+     *
+     * @param user The User entity to be converted.
+     * @return A UserResponse DTO with user data.
+     */
     public UserResponse convertToUserResponse(User user) {
         UserResponse userResponse = new UserResponse();
         userResponse.setId(String.valueOf(user.getId()));

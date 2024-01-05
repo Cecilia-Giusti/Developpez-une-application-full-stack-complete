@@ -15,12 +15,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Service class for managing articles.
+ * This class handles operations related to articles, such as creating articles, fetching articles
+ * by themes, and retrieving articles for the current user.
+ */
 @Service
 public class ArticlesService {
 
@@ -29,16 +33,32 @@ public class ArticlesService {
 
     @Autowired
     private SubscriptionRepository subscriptionRepository;
+
     @Autowired
     private UserRepository userRepository;
 
     @Autowired
     private ThemeRepository themeRepository;
 
+    /**
+     * Retrieves articles based on a list of theme IDs.
+     *
+     * @param themeIds List of theme IDs.
+     * @return List of articles associated with the given theme IDs.
+     */
     public List<Article> getArticlesForThemesIdr(List<Integer> themeIds) {
         return articleRepository.findByThemeIdIn(themeIds);
     }
 
+    /**
+     * Retrieves articles subscribed to by the current user.
+     *
+     * @param userEmail Email of the current user.
+     * @return List of ArticleResponse objects for the subscribed themes.
+     * @throws UsernameNotFoundException if the user is not found by email.
+     * @throws NoSubscribedThemesException if the user has no subscribed themes.
+     * @throws NoArticlesFoundException if no articles are found for the subscribed themes.
+     */
     public List<ArticleResponse> getArticlesForCurrentUser(String userEmail) {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
@@ -59,7 +79,14 @@ public class ArticlesService {
                 .collect(Collectors.toList());
     }
 
-
+    /**
+     * Creates a new article based on the provided request and user's email.
+     *
+     * @param articleRequest The request containing article data.
+     * @param userEmail      Email of the user creating the article.
+     * @throws UsernameNotFoundException if the user is not found.
+     * @throws EntityNotFoundException if the theme is not found.
+     */
     public void createArticle(ArticleRequest articleRequest, String userEmail) {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
@@ -74,11 +101,16 @@ public class ArticlesService {
         article.setContent(articleRequest.getContent());
         article.setCreatedAt(LocalDateTime.now());
 
-        Article savedArticle = articleRepository.save(article);
-
-        new ArticleResponse(savedArticle);
+        articleRepository.save(article);
     }
 
+    /**
+     * Retrieves a single article by its ID.
+     *
+     * @param articleId The ID of the article to retrieve.
+     * @return An ArticleResponse object representing the article.
+     * @throws EntityNotFoundException if the article is not found.
+     */
     public ArticleResponse getArticleById(Integer articleId) {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new EntityNotFoundException("Article not found with ID: " + articleId));

@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller for managing user subscriptions to themes.
+ */
 @RestController
 @Slf4j
 @RequestMapping(value = "subscriptions")
@@ -20,9 +23,12 @@ public class SubscriptionController {
     @Autowired
     private SubscriptionService subscriptionService;
 
-    @Autowired
-    private UserRepository userRepository;
-
+    /**
+     * Retrieves a list of theme IDs to which the current user is subscribed.
+     *
+     * @param authentication The security context of the authenticated user.
+     * @return A ResponseEntity containing a list of subscribed theme IDs.
+     */
     @GetMapping
     public ResponseEntity<List<Integer>> getSubscriptionsForCurrentUser(Authentication authentication) {
         String userEmail = authentication.getName();
@@ -30,6 +36,13 @@ public class SubscriptionController {
         return ResponseEntity.ok(themeIds);
     }
 
+    /**
+     * Creates a new subscription to a theme for the current user.
+     *
+     * @param themeId The ID of the theme to which the user wants to subscribe.
+     * @param authentication The security context of the authenticated user.
+     * @return A ResponseEntity with a message indicating successful subscription.
+     */
     @PostMapping("/{themeId}")
     public ResponseEntity<MessageResponse> createSubscription(@PathVariable Integer themeId, Authentication authentication) {
         String userEmail = authentication.getName();
@@ -40,6 +53,14 @@ public class SubscriptionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    /**
+     * Deletes a subscription to a theme for the current user.
+     * This endpoint removes the subscription of the authenticated user to the specified theme ID.
+     *
+     * @param themeId The ID of the theme from which the user wants to unsubscribe.
+     * @param authentication The security context of the authenticated user.
+     * @return A ResponseEntity with HTTP 204 No Content status, indicating successful unsubscription.
+     */
     @DeleteMapping("/{themeId}")
     public ResponseEntity<Void> deleteSubscription(@PathVariable Integer themeId, Authentication authentication) {
         String userEmail = authentication.getName();

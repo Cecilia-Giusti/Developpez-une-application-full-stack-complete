@@ -6,6 +6,10 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.Map;
 
+/**
+ * Data Transfer Object (DTO) representing the response for user-related operations.
+ * This class encapsulates user-related information typically used in responses to requests for user data.
+ */
 @Getter
 @Setter
 public class UserResponse {
@@ -17,19 +21,20 @@ public class UserResponse {
     private LocalDateTime updated_at;
 
     /**
-     * Default constructor.
+     * Default constructor for UserResponse.
      */
     public UserResponse() {
     }
 
     /**
-     * Constructor to create an instance with specific user details.
+     * Constructs a UserResponse with detailed user information.
+     * This constructor is used for creating a response object with specific user details.
      *
      * @param id         The unique identifier of the user.
      * @param username   The username of the user.
      * @param email      The email address of the user.
-     * @param created_at The date and time the user was created.
-     * @param updated_at The date and time the user was last updated.
+     * @param created_at The date and time when the user account was created.
+     * @param updated_at The date and time when the user account was last updated.
      */
     public UserResponse(String id, String username, String email, LocalDateTime created_at, LocalDateTime updated_at) {
         this.id = id;
@@ -40,9 +45,10 @@ public class UserResponse {
     }
 
     /**
-     * Constructor to create an instance from a Map.
+     * Constructs a UserResponse from a Map containing user information.
+     * This constructor allows creating a user response object using a map with user-related key-value pairs.
      *
-     * @param userInfo A map containing user information.
+     * @param userInfo A map containing key-value pairs of user information.
      */
     public UserResponse(Map<String, Object> userInfo) {
         if (userInfo != null) {

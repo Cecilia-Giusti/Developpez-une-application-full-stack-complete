@@ -17,10 +17,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
 /**
- * Spring Security configuration for the application.
- * This class provides necessary beans and configurations to secure the application.
+ * Configuration class for Spring Security.
+ * It sets up the security configurations for the web application, including HTTP security,
+ * authentication manager, password encoder, and JWT filter.
  */
 @Configuration
 @EnableWebSecurity
@@ -31,12 +31,14 @@ public class SpringSecurityConfig {
     private JwtFilter jwtFilter;
 
     @Autowired
-    private com.openclassrooms.mddapi.security.configuration.CustomUserDetailsService customUserDetailsService;
+    private CustomUserDetailsService customUserDetailsService;
 
     /**
-     * Configures and returns the security filter chain for the application.
-     * @param http The HttpSecurity object to configure.
-     * @throws Exception If an error occurs during configuration.
+     * Configures the HTTP security for the application.
+     *
+     * @param http HttpSecurity object to configure.
+     * @return The configured SecurityFilterChain.
+     * @throws Exception if there is an error in the configuration.
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -58,10 +60,9 @@ public class SpringSecurityConfig {
         return http.build();
     }
 
-
     /**
-     * Returns the password encoder for the application.
-     * @return An instance of BCryptPasswordEncoder.
+     * Bean for password encoding using BCrypt.
+     * @return A PasswordEncoder that uses BCrypt hashing for encoding passwords.
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -69,8 +70,8 @@ public class SpringSecurityConfig {
     }
 
     /**
-     * Returns the authentication provider for the application.
-     * @return A configured instance of DaoAuthenticationProvider.
+     * Provides an AuthenticationProvider using the custom user details service and password encoder.
+     * @return An AuthenticationProvider for the application.
      */
     @Bean
     public AuthenticationProvider authenticationProvider() {
@@ -81,10 +82,10 @@ public class SpringSecurityConfig {
     }
 
     /**
-     * Returns the authentication manager for the application.
-     * @param config The authentication configuration.
-     * @return An instance of the authentication manager.
-     * @throws Exception If an error occurs during retrieval.
+     * Configures the AuthenticationManager using the provided AuthenticationConfiguration.
+     * @param config The AuthenticationConfiguration object.
+     * @return The configured AuthenticationManager.
+     * @throws Exception if there is an error in the configuration.
      */
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config)
@@ -92,4 +93,3 @@ public class SpringSecurityConfig {
         return config.getAuthenticationManager();
     }
 }
-
