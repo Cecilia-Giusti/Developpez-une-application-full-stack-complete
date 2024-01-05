@@ -70,7 +70,7 @@
         "header": [
           {
             "key": "Authorization",
-            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZ1c2VyM0BleGFtcGxlLmNvbSIsImlhdCI6MTcwMzY5ODUxNywiZXhwIjoxNzAzNzAwMzE3fQ.07PnWp17wGtqBH6H_ePqkCB95hXlbyBXb9H2q_OvaRM",
+            "value": "Bearer YOUR_JWT_TOKEN",
             "type": "text"
           }
         ],
@@ -96,7 +96,7 @@
         "header": [
           {
             "key": "Authorization",
-            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZXZ1c2VyM0BleGFtcGxlLmNvbSIsImlhdCI6MTcwMzY5ODUxNywiZXhwIjoxNzAzNzAwMzE3fQ.07PnWp17wGtqBH6H_ePqkCB95hXlbyBXb9H2q_OvaRM",
+            "value": "Bearer YOUR_JWT_TOKEN",
             "type": "text"
           }
         ],
@@ -159,7 +159,7 @@
         "header": [
           {
             "key": "Authorization",
-            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuZXdFbWFpbEBleGFtcGxlLmNvbSIsImlhdCI6MTcwNDAxMzcxOCwiZXhwIjoxNzA0MDE1NTE4fQ.TGs2JgzExPjNkplSk47t8vPDHrbBneQ4hM_gzrUoEWs",
+            "value": "Bearer YOUR_JWT_TOKEN",
             "type": "text"
           }
         ],
@@ -192,7 +192,7 @@
         "header": [
           {
             "key": "Authorization",
-            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuZXdFbWFpbEBleGFtcGxlLmNvbSIsImlhdCI6MTcwNDAxMTQyMSwiZXhwIjoxNzA0MDEzMjIxfQ.rDOjkOQtm6zR0aayzQqsoZ3ZMYZzNwMOQ7_pYBVoZ08",
+            "value": "Bearer YOUR_JWT_TOKEN",
             "type": "text"
           }
         ],
@@ -277,7 +277,7 @@
         "header": [
           {
             "key": "Authorization",
-            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuZXdFbWFpbEBleGFtcGxlLmNvbSIsImlhdCI6MTcwNDAxODA5MSwiZXhwIjoxNzA0MDE5ODkxfQ.PH4mJVAW12mj8t93xeeZ5DsEwlqiqqkHSOR8aE6uTVQ",
+            "value": "Bearer YOUR_JWT_TOKEN",
             "type": "text"
           }
         ],
@@ -339,7 +339,7 @@
         "header": [
           {
             "key": "Authorization",
-            "value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuZXdFbWFpbEBleGFtcGxlLmNvbSIsImlhdCI6MTcwNDAyMDQ5MSwiZXhwIjoxNzA0MDIyMjkxfQ.G5hPykaZ0Spd7VDxyTb3khWkfXLVr1Lu_kyEY8fyWKU",
+            "value": "Bearer YOUR_JWT_TOKEN",
             "type": "text"
           }
         ],
