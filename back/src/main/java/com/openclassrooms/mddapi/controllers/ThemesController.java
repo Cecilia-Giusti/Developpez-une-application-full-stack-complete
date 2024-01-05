@@ -1,7 +1,7 @@
 package com.openclassrooms.mddapi.controllers;
 
 import com.openclassrooms.mddapi.models.Theme;
-import com.openclassrooms.mddapi.Dto.response.ThemesResponse;
+import com.openclassrooms.mddapi.dto.response.ThemesResponse;
 import com.openclassrooms.mddapi.repository.ThemeRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

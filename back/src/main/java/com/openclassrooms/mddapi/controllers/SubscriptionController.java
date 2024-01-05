@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.controllers;
 
-import com.openclassrooms.mddapi.Dto.response.MessageResponse;
-import com.openclassrooms.mddapi.repository.UserRepository;
+import com.openclassrooms.mddapi.dto.response.MessageResponse;
 import com.openclassrooms.mddapi.services.SubscriptionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

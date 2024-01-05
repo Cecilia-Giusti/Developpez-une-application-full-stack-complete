@@ -49,8 +49,8 @@ CREATE TABLE `COMMENTS` (
 
 INSERT INTO USERS (username, email, password, created_at, updated_at)
 VALUES
-('devUser1', 'devuser1@example.com', 'hashed_password1', NOW(), NOW()),
-('devUser2', 'devuser2@example.com', 'hashed_password2', NOW(), NOW());
+('devUser1', 'devuser1@example.com', '$2a$10$iHlJb.gWu/emhK02Iresd.9RBZMOTURTwAntTH9Fpce5Qpv3ropfu', NOW(), NOW()),
+('devUser2', 'devuser2@example.com', '$2a$10$iHlJb.gWu/emhK02Iresd.9RBZMOTURTwAntTH9Fpce5Qpv3ropfu', NOW(), NOW());
 
 INSERT INTO THEMES (name, description, created_at)
 VALUES
