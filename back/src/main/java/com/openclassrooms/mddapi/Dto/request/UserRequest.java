@@ -2,6 +2,9 @@ package com.openclassrooms.mddapi.Dto.request;
 import lombok.Data;
 import javax.validation.constraints.Email;
 
+/**
+ * Data Transfer Object (DTO) for user request.
+ */
 @Data
 public class UserRequest {
 
@@ -12,7 +15,6 @@ public class UserRequest {
 
     /**
      * The email of the user.
-     * This field must be a valid email format.
      */
     @Email(message = "Enter a valid email")
     private String email;

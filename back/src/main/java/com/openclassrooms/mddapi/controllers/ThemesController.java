@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+/**
+ * Controller for managing theme-related actions.
+ */
 @RestController
 @Slf4j
 @RequestMapping(value = "themes")
@@ -21,6 +24,11 @@ public class ThemesController {
     @Autowired
     private ThemeRepository themeRepository;
 
+    /**
+     * Retrieves all themes available in the platform.
+     *
+     * @return A ResponseEntity containing all themes or an empty body if no themes exist.
+     */
     @GetMapping
     public ResponseEntity<ThemesResponse> getAllThemes() {
         List<Theme> themes = themeRepository.findAll();
@@ -32,3 +40,4 @@ public class ThemesController {
         }
     }
 }
+

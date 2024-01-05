@@ -14,9 +14,8 @@ import javax.validation.Valid;
 
 
 /**
- * Controller handling authentication operations such as user registration and login.
+ * Controller for handling authentication operations such as user registration and login.
  */
-
 @RestController
 @Slf4j
 @RequestMapping(value = "auth")
@@ -25,31 +24,31 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-
     /**
-     * Registers a new user and returns an authentication token.
+     * Registers a new user in the system.
      *
-     * @param registerRequest The details of the user to register.
-     * @return A ResponseEntity containing the authentication token for the newly registered user.
+     * @param registerRequest The user registration details.
+     * @return A ResponseEntity containing the JWT token for the newly registered user.
      */
     @PostMapping("/register")
-    public ResponseEntity<JwtResponse> createUser(@RequestBody @Valid RegisterRequest registerRequest) {
+    public ResponseEntity<JwtResponse> createUser(@Valid @RequestBody RegisterRequest registerRequest) {
         String token = authService.registerUser(registerRequest);
         JwtResponse jwtResponse = new JwtResponse(token);
         return ResponseEntity.status(HttpStatus.CREATED).body(jwtResponse);
     }
 
     /**
-     * Authenticates a user and returns an authentication token.
+     * Authenticates a user and issues a JWT token.
      *
-     * @param loginRequest The details of the user for logging in.
-     * @return A ResponseEntity containing the authentication token for the logged-in user.
+     * @param loginRequest The user login credentials.
+     * @return A ResponseEntity containing the JWT token for the authenticated user.
      */
     @PostMapping("/login")
-    public ResponseEntity<JwtResponse> loginUser(@RequestBody @Valid LoginRequest loginRequest) {
+    public ResponseEntity<JwtResponse> loginUser(@Valid @RequestBody LoginRequest loginRequest) {
         String token = authService.loginUser(loginRequest);
         JwtResponse jwtResponse = new JwtResponse(token);
         return ResponseEntity.ok(jwtResponse);
     }
 }
+
 

@@ -14,7 +14,7 @@ import javax.validation.Valid;
 
 
 /**
- * Controller handling authentication operations such as user registration and login.
+ * Controller for managing user profiles and details.
  */
 @RestController
 @Slf4j
@@ -25,8 +25,9 @@ public class UserController {
     private UserService userService;
 
     /**
-     * Retrieves the details of the currently authenticated user.
-     * @return A ResponseEntity containing the UserResponse object of the authenticated user.
+     * Retrieves the profile information of the currently authenticated user.
+     *
+     * @return A ResponseEntity containing the UserResponse with user profile details.
      */
     @GetMapping("/profile")
     public ResponseEntity<UserResponse> getUserInfo() {
@@ -35,9 +36,12 @@ public class UserController {
         return ResponseEntity.ok(userResponse);
     }
 
-    //Questions
-    // Vaut il mieux retourner le profil mis à jour
-    // ou il est préférable en front de faire un get après le put ?
+    /**
+     * Updates the profile information of the currently authenticated user.
+     *
+     * @param userRequest The user's updated profile data.
+     * @return A ResponseEntity containing a MessageResponse indicating a successful update.
+     */
     @PutMapping("/profile")
     public ResponseEntity<MessageResponse> updateUser(@RequestBody @Valid UserRequest userRequest) {
         User user = userService.updateUser(userRequest);
@@ -46,4 +50,5 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 }
+
 
