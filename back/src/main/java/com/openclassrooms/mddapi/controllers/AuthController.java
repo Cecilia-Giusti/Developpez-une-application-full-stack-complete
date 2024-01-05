@@ -1,8 +1,8 @@
 package com.openclassrooms.mddapi.controllers;
 
-import com.openclassrooms.mddapi.payload.request.LoginRequest;
-import com.openclassrooms.mddapi.payload.request.RegisterRequest;
-import com.openclassrooms.mddapi.payload.response.JwtResponse;
+import com.openclassrooms.mddapi.dto.request.LoginRequest;
+import com.openclassrooms.mddapi.dto.request.RegisterRequest;
+import com.openclassrooms.mddapi.dto.response.JwtResponse;
 import com.openclassrooms.mddapi.services.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

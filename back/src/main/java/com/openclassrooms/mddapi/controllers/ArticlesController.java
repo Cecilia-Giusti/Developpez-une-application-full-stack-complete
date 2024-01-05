@@ -1,8 +1,8 @@
 package com.openclassrooms.mddapi.controllers;
 
-import com.openclassrooms.mddapi.payload.request.ArticleRequest;
-import com.openclassrooms.mddapi.payload.response.ArticleResponse;
-import com.openclassrooms.mddapi.payload.response.MessageResponse;
+import com.openclassrooms.mddapi.dto.request.ArticleRequest;
+import com.openclassrooms.mddapi.dto.response.ArticleResponse;
+import com.openclassrooms.mddapi.dto.response.MessageResponse;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import com.openclassrooms.mddapi.services.ArticlesService;
 import lombok.extern.slf4j.Slf4j;

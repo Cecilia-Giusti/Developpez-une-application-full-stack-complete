@@ -1,4 +1,4 @@
-package com.openclassrooms.mddapi.payload.response;
+package com.openclassrooms.mddapi.dto.response;
 
 import com.openclassrooms.mddapi.models.Article;
 import lombok.Getter;

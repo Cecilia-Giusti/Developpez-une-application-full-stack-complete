@@ -3,7 +3,7 @@ package com.openclassrooms.mddapi.services;
 import com.openclassrooms.mddapi.models.Article;
 import com.openclassrooms.mddapi.models.Comment;
 import com.openclassrooms.mddapi.models.User;
-import com.openclassrooms.mddapi.payload.request.CommentRequest;
+import com.openclassrooms.mddapi.dto.request.CommentRequest;
 import com.openclassrooms.mddapi.repository.ArticleRepository;
 import com.openclassrooms.mddapi.repository.CommentRepository;
 import com.openclassrooms.mddapi.repository.SubscriptionRepository;
