@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
-import { HeaderComponent } from './header/header.component';
+import { HeaderAuthComponent } from './header-auth/header-auth.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { HeaderComponent } from './header/header.component';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    HeaderComponent,
+    HeaderAuthComponent,
   ],
   imports: [
     BrowserModule,
