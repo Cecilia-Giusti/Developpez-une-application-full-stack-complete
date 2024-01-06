@@ -3,12 +3,12 @@
 header {
     border-bottom: 1px solid $black;
 
-    @include screen-max($mobile-breakpoint) {
+    @include screen-max($mobileBreakpoint) {
         display: none;
     }
 
     img {
         width: 10%;
-        margin-left: 3rem;
+        @include margin-horizontal($marginContainerHeader);
     }
 }

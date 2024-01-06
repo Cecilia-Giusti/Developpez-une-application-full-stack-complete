@@ -5,7 +5,7 @@
   height: 100vh;
   @include flex($direction: column);
 
-  @include screen-max($mobile-breakpoint) {
+  @include screen-max($mobileBreakpoint) {
     justify-content: flex-start;
     margin-top: 6rem;
   }
@@ -14,7 +14,7 @@
 img {
   margin: 0 auto;
 
-  @include screen-max($mobile-breakpoint) {
+  @include screen-max($mobileBreakpoint) {
     width: 100%;
   }
 }
@@ -23,7 +23,7 @@ img {
   @include flex;
   gap: 2rem;
 
-  @include screen-max($mobile-breakpoint) {
+  @include screen-max($mobileBreakpoint) {
     flex-direction: column;
   }
 

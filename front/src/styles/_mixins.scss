@@ -10,3 +10,8 @@
         @content;
     }
 }
+
+@mixin margin-horizontal($marginLeft : 3rem, $marginRight: $marginLeft) {
+    margin-left: $marginLeft ;
+    margin-right: $marginRight;
+}
