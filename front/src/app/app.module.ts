@@ -12,6 +12,9 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { PreviousComponent } from './previous/previous.component';
+import { MatInputModule } from '@angular/material/input';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { LogoComponent } from './logo/logo.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,7 @@ import { PreviousComponent } from './previous/previous.component';
     LoginComponent,
     HeaderComponent,
     PreviousComponent,
+    LogoComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,8 +33,14 @@ import { PreviousComponent } from './previous/previous.component';
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
+    MatInputModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {

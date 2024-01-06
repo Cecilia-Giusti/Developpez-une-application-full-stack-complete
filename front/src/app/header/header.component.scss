@@ -1,14 +1,19 @@
 @import '../../styles/styles';
 
 header {
-    border-bottom: 1px solid $black;
+    @include flex($justify: flex-start, $direction: column, $align: flex-start);
+    width: 100%;
 
     @include screen-max($mobileBreakpoint) {
-        display: none;
+        flex-direction: column-reverse;
     }
+}
 
-    img {
-        width: 10%;
-        @include margin-horizontal($marginContainerHeader);
+.header-container {
+    border-bottom: 1px solid $black;
+    width: 100%;
+
+    @include screen-max($mobileBreakpoint) {
+        border-bottom: none;
     }
 }
