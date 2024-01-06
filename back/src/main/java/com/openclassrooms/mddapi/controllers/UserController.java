@@ -16,6 +16,7 @@ import javax.validation.Valid;
 /**
  * Controller for managing user profiles and details.
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @Slf4j
 @RequestMapping(value = "user")
