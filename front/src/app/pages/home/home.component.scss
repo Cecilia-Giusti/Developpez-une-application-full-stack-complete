@@ -1,7 +1,35 @@
+@import '../../../styles/styles';
+
+
 .center {
   height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  @include flex($direction: column);
+
+  @include screen-max($mobile-breakpoint) {
+    justify-content: flex-start;
+    margin-top: 6rem;
+  }
+}
+
+img {
+  margin: 0 auto;
+
+  @include screen-max($mobile-breakpoint) {
+    width: 100%;
+  }
+}
+
+.buttons {
+  @include flex;
+  gap: 2rem;
+
+  @include screen-max($mobile-breakpoint) {
+    flex-direction: column;
+  }
+
+  a {
+    border-color: $black;
+    width: 100%;
+    min-width: 125px;
+  }
 }
