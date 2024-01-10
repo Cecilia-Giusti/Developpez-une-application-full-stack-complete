@@ -1,0 +1,19 @@
+@import '../../styles/styles';
+
+header {
+    @include flex($justify: flex-start, $direction: column, $align: flex-start);
+    width: 100%;
+
+    @include screen-max($mobileBreakpoint) {
+        flex-direction: column-reverse;
+    }
+}
+
+.header-container {
+    border-bottom: 1px solid $black;
+    width: 100%;
+
+    @include screen-max($mobileBreakpoint) {
+        border-bottom: none;
+    }
+}

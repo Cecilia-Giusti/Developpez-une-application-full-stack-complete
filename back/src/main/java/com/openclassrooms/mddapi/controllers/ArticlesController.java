@@ -18,6 +18,7 @@ import java.util.List;
 /**
  * Controller for handling requests related to articles.
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @Slf4j
 @RequestMapping(value = "articles")

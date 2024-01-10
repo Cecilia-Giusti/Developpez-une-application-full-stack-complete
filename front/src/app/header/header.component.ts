@@ -11,10 +11,10 @@ import { Component, OnInit } from '@angular/core';
  */
 @Component({
   selector: 'app-header',
-  templateUrl: './header-auth.component.html',
-  styleUrls: ['./header-auth.component.scss'],
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
 })
-export class HeaderAuthComponent implements OnInit {
+export class HeaderComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}

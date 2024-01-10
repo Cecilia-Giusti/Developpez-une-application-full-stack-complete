@@ -14,6 +14,7 @@ import java.util.List;
 /**
  * Controller for managing user subscriptions to themes.
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @Slf4j
 @RequestMapping(value = "subscriptions")

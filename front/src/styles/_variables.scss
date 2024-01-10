@@ -5,4 +5,11 @@ $black: #000;
 
 //-------- SIZE ---------------
 
-$mobile-breakpoint: 768px;
+$mobileBreakpoint: 768px;
+
+$marginContainer: 3rem;
+$marginContainerHeader: $marginContainer /2;
+
+//-------- FONTS ---------------
+$fontTitle : 'Inter',
+sans-serif;
