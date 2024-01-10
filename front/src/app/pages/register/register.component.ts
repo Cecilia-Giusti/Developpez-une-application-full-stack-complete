@@ -24,10 +24,12 @@ export class RegisterComponent implements OnInit {
       this.authService.registerUser(this.user).subscribe({
         next: (response) => {
           console.log('Inscription réussie', response);
-          // Gérer la réponse, par exemple rediriger l'utilisateur ou afficher un message de succès
+          //TODO GET ET REDIRECTION
+          //ACCEPTER USERNAME
         },
         error: (error) => {
           console.error(error);
+          //TODO AFFICHER MESSAGE ERREUR DANS FRONT
         },
       });
     }
