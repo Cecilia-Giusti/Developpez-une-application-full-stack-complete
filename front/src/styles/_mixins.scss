@@ -11,7 +11,7 @@
     }
 }
 
-@mixin margin-horizontal($marginLeft : 3rem, $marginRight: $marginLeft) {
+@mixin margin-horizontal($marginLeft : $marginContainer, $marginRight: $marginLeft) {
     margin-left: $marginLeft ;
     margin-right: $marginRight;
 }

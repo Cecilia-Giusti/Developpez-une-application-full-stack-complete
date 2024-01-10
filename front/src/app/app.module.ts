@@ -15,6 +15,7 @@ import { PreviousComponent } from './previous/previous.component';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { LogoComponent } from './logo/logo.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { LogoComponent } from './logo/logo.component';
     MatButtonModule,
     MatIconModule,
     MatInputModule,
+    FormsModule,
   ],
   providers: [
     {
