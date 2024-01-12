@@ -1,6 +1,8 @@
 <header>
     <div class="header-container">
-        <app-logo [page]="'page-auth'" ></app-logo>
+      <app-logo [page]="'page-auth'"></app-logo>
+      <app-nav *ngIf="shouldShowNav()"></app-nav>
     </div>
-    <app-previous></app-previous>
-</header>
+    <app-previous *ngIf="shouldShowPrevious()"></app-previous>
+  </header>
+  

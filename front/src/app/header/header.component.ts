@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 /**
  * Represents the header component of the application.
@@ -15,7 +16,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
+
+  shouldShowPrevious(): boolean {
+    return this.router.url === '/login' || this.router.url === '/register';
+  }
+
+  shouldShowNav(): boolean {
+    return (
+      this.router.url !== '/login' &&
+      this.router.url !== '/register' &&
+      this.router.url !== ''
+    );
+  }
 }
