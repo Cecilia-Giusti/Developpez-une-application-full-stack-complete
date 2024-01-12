@@ -17,6 +17,9 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { LogoComponent } from './logo/logo.component';
 import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { NavComponent } from './nav/nav.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     PreviousComponent,
     LogoComponent,
     DashboardComponent,
+    NavComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +42,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     MatIconModule,
     MatInputModule,
     FormsModule,
+    MatMenuModule,
+    MatListModule,
   ],
   providers: [
     {
@@ -55,6 +61,10 @@ export class AppModule {
     this.matIconRegistry.addSvgIcon(
       'arrow',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/arrow.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'user',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/user.svg')
     );
   }
 }
