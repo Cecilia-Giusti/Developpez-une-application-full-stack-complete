@@ -16,6 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { LogoComponent } from './logo/logo.component';
 import { FormsModule } from '@angular/forms';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     PreviousComponent,
     LogoComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

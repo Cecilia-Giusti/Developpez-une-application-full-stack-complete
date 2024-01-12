@@ -2,6 +2,9 @@
 
 <section class="form-container">
   <h1>Inscription</h1>
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
   <form #registrationForm="ngForm" (ngSubmit)="submit(registrationForm)">
 
     <mat-form-field>
