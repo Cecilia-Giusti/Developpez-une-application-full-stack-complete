@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginRequest } from 'src/app/core/models/login-request.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 
@@ -14,7 +15,9 @@ export class LoginComponent implements OnInit {
     password: '',
   };
 
-  constructor(private authService: AuthService) {}
+  errorMessage: string = '';
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -22,13 +25,14 @@ export class LoginComponent implements OnInit {
     if (form.valid) {
       this.authService.loginUser(this.user).subscribe({
         next: (response) => {
-          console.log('Connexion réussie', response);
-          //TODO GET ET REDIRECTION
+          (this.errorMessage = ''),
+            localStorage.setItem('token', response.token);
+          this.router.navigate(['/dashboard']);
           //ACCEPTER USERNAME
         },
         error: (error) => {
-          console.error('Erreur lors de la connexion', error);
-          //TODO AFFICHER MESSAGE ERREUR DANS FRONT
+          this.errorMessage =
+            error || 'Une erreur est survenue lors de la connexion.';
         },
       });
     }
