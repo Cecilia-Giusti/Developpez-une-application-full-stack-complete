@@ -1,24 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { LogoComponent } from '../logo/logo.component';
+import { NavComponent } from '../nav/nav.component';
+import { PreviousComponent } from '../previous/previous.component';
+import { CommonModule } from '@angular/common';
 
 /**
  * Represents the header component of the application.
- *
  * @component HeaderAuthComponent
  * @selector app-header
- *
- * @description
- * The HeaderAuthComponent is a reusable Angular component that serves as the application's site-wide header for authentification page.
  */
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  standalone: true,
+  imports: [
+    RouterModule,
+    LogoComponent,
+    NavComponent,
+    PreviousComponent,
+    CommonModule,
+  ],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   constructor(private router: Router) {}
-
-  ngOnInit(): void {}
 
   shouldShowPrevious(): boolean {
     return this.router.url === '/login' || this.router.url === '/register';

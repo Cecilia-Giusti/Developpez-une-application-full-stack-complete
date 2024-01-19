@@ -3,6 +3,10 @@
 .nav {
     @include flex($justify: flex-start);
 
+    @include screen-max($mobileBreakpoint) {
+        display: none;
+    }
+
     .nav-item {
         width: auto;
         color: $black;
@@ -33,5 +37,56 @@
 
     .active-item {
         color: $purple;
+    }
+}
+
+.nav-mobile {
+    display: none;
+
+    @include screen-max($mobileBreakpoint) {
+        display: block;
+    }
+
+    .sidenav {
+        width: 50%;
+
+        .mat-icon {
+            width: 40px;
+            height: 40px;
+            transition-duration: 300ms;
+
+            &:hover {
+                transform: scale(1.2);
+                transition-duration: 300ms;
+            }
+        }
+    }
+
+    &-list {
+        height: 100%;
+        box-sizing: border-box;
+        padding: 5rem 0 1rem;
+        @include flex($direction: column, $justify: space-between, $align: flex-end)
+    }
+
+    &-item {
+        width: 100%;
+
+        a {
+            color: $black;
+            font-family: $fontTitle;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            transition-duration: 250ms;
+
+            &:hover {
+                background: none;
+                color: $purple;
+                transition-duration: 250ms;
+            }
+        }
+
     }
 }

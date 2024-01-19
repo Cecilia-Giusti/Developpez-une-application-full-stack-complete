@@ -11,15 +11,14 @@ import { RegisterComponent } from './pages/register/register.component';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { PreviousComponent } from './previous/previous.component';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-import { LogoComponent } from './logo/logo.component';
 import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { NavComponent } from './nav/nav.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
+import { ArticleComponent } from './article/article.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -27,12 +26,16 @@ import { MatListModule } from '@angular/material/list';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    HeaderComponent,
-    PreviousComponent,
-    LogoComponent,
     DashboardComponent,
-    NavComponent,
+    ArticleComponent,
   ],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
+    },
+  ],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -44,14 +47,9 @@ import { MatListModule } from '@angular/material/list';
     FormsModule,
     MatMenuModule,
     MatListModule,
+    MatCardModule,
+    HeaderComponent,
   ],
-  providers: [
-    {
-      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: { appearance: 'outline' },
-    },
-  ],
-  bootstrap: [AppComponent],
 })
 export class AppModule {
   constructor(
@@ -65,6 +63,10 @@ export class AppModule {
     this.matIconRegistry.addSvgIcon(
       'user',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/user.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'burger',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/burger.svg')
     );
   }
 }
