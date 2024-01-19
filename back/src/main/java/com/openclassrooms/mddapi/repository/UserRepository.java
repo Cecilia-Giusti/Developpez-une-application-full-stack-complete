@@ -2,6 +2,7 @@ package com.openclassrooms.mddapi.repository;
 
 import com.openclassrooms.mddapi.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
@@ -36,4 +37,16 @@ public interface UserRepository extends JpaRepository<User, Integer> {
      * @return The User entity with the specified ID.
      */
     User getById(Integer id);
+
+    /**
+     * Retrieves a user by their ID.
+     * This request finds and returns the Username where the ID matches the provided ID.
+     *
+     * @param id The ID of the user to retrieve.
+     * @return The Username entity with the specified ID.
+     */
+    @Query("SELECT u.username FROM User u WHERE u.id = :id")
+    String findUsernameById(Integer id);
+
+
 }

@@ -42,12 +42,9 @@ public class SpringSecurityConfig {
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
+        http.cors().and().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/auth/register", "/auth/login",
-                        "/v2/api-docs", "/swagger-ui/*", "/swagger-ui.html",
-                        "/swagger-resources/**", "/webjars/**")
+                .antMatchers("/", "/auth/register", "/auth/login")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

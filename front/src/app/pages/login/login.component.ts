@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { LoginRequest } from 'src/app/core/models/login-request.model';
+import { Subject, takeUntil } from 'rxjs';
+import { LoginRequest } from 'src/app/core/models/request/login-request.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 
 @Component({
@@ -9,7 +10,9 @@ import { AuthService } from 'src/app/core/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnDestroy {
+  private destroy$: Subject<boolean> = new Subject();
+
   user: LoginRequest = {
     email: '',
     password: '',
@@ -19,22 +22,32 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit(): void {}
-
   submit(form: NgForm) {
+    this.destroy$ = new Subject<boolean>();
     if (form.valid) {
-      this.authService.loginUser(this.user).subscribe({
-        next: (response) => {
-          (this.errorMessage = ''),
-            localStorage.setItem('token', response.token);
-          this.router.navigate(['/dashboard']);
-          //ACCEPTER USERNAME
-        },
-        error: (error) => {
-          this.errorMessage =
-            error || 'Une erreur est survenue lors de la connexion.';
-        },
-      });
+      this.authService
+        .loginUser(this.user)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (response) => {
+            (this.errorMessage = ''),
+              localStorage.setItem('token', response.token);
+            this.router.navigate(['/dashboard']);
+            //ACCEPTER USERNAME
+          },
+          error: (error) => {
+            this.errorMessage =
+              error || 'Une erreur est survenue lors de la connexion.';
+          },
+        });
     }
+  }
+
+  /**
+   * Sends a true value to `destroy$` to indicate that the component is about to be destroyed.
+   */
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

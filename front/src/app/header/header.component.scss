@@ -10,6 +10,7 @@ header {
 }
 
 .header-container {
+    @include flex($justify: space-between);
     border-bottom: 1px solid $black;
     width: 100%;
 

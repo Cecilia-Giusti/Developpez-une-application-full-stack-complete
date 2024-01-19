@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,12 +11,19 @@ import { RegisterComponent } from './pages/register/register.component';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { PreviousComponent } from './previous/previous.component';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
-import { LogoComponent } from './logo/logo.component';
 import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
+import { ArticleCardComponent } from './articleCard/articleCard.component';
+import { MatCardModule } from '@angular/material/card';
+import * as fr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+import { NewArticleComponent } from './new-article/new-article.component';
+import { MatSelectModule } from '@angular/material/select';
+import { ArticleComponent } from './article/article.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +31,22 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    HeaderComponent,
-    PreviousComponent,
-    LogoComponent,
     DashboardComponent,
+    ArticleCardComponent,
+    NewArticleComponent,
+    ArticleComponent,
   ],
+  providers: [
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: { appearance: 'outline' },
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'fr-FR',
+    },
+  ],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     HttpClientModule,
@@ -38,14 +56,12 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     MatIconModule,
     MatInputModule,
     FormsModule,
+    MatMenuModule,
+    MatListModule,
+    MatCardModule,
+    HeaderComponent,
+    MatSelectModule,
   ],
-  providers: [
-    {
-      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: { appearance: 'outline' },
-    },
-  ],
-  bootstrap: [AppComponent],
 })
 export class AppModule {
   constructor(
@@ -56,5 +72,14 @@ export class AppModule {
       'arrow',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/arrow.svg')
     );
+    this.matIconRegistry.addSvgIcon(
+      'user',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/user.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'burger',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/burger.svg')
+    );
+    registerLocaleData(fr.default);
   }
 }
