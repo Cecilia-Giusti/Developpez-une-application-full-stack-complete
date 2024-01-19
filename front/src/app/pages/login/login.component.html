@@ -2,6 +2,9 @@
 
 <section class="form-container">
   <h1>Se connecter</h1>
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
   <form #LoginForm="ngForm" (ngSubmit)="submit(LoginForm)">
 
     <mat-form-field>
