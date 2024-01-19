@@ -27,7 +27,15 @@ export class HeaderComponent {
   constructor(private router: Router) {}
 
   shouldShowPrevious(): boolean {
-    return this.router.url === '/login' || this.router.url === '/register';
+    const url = this.router.url;
+    const articleIdPattern = /^\/article\/\d+$/;
+
+    return (
+      url === '/login' ||
+      url === '/register' ||
+      url === '/article' ||
+      articleIdPattern.test(url)
+    );
   }
 
   shouldShowNav(): boolean {

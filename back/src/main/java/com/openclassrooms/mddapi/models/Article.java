@@ -56,4 +56,11 @@ public class Article {
     @Setter
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
+
+    /**
+     * Date and time when the article was updated.
+     */
+    @Setter
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
 }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,8 +17,13 @@ import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
-import { ArticleComponent } from './article/article.component';
+import { ArticleCardComponent } from './articleCard/articleCard.component';
 import { MatCardModule } from '@angular/material/card';
+import * as fr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+import { NewArticleComponent } from './new-article/new-article.component';
+import { MatSelectModule } from '@angular/material/select';
+import { ArticleComponent } from './article/article.component';
 
 @NgModule({
   declarations: [
@@ -27,12 +32,18 @@ import { MatCardModule } from '@angular/material/card';
     RegisterComponent,
     LoginComponent,
     DashboardComponent,
+    ArticleCardComponent,
+    NewArticleComponent,
     ArticleComponent,
   ],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: { appearance: 'outline' },
+    },
+    {
+      provide: LOCALE_ID,
+      useValue: 'fr-FR',
     },
   ],
   bootstrap: [AppComponent],
@@ -49,6 +60,7 @@ import { MatCardModule } from '@angular/material/card';
     MatListModule,
     MatCardModule,
     HeaderComponent,
+    MatSelectModule,
   ],
 })
 export class AppModule {
@@ -68,5 +80,6 @@ export class AppModule {
       'burger',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/burger.svg')
     );
+    registerLocaleData(fr.default);
   }
 }

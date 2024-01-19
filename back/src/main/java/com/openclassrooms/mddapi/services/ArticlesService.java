@@ -55,9 +55,9 @@ public class ArticlesService {
      *
      * @param userEmail Email of the current user.
      * @return List of ArticleResponse objects for the subscribed themes.
-     * @throws UsernameNotFoundException if the user is not found by email.
+     * @throws UsernameNotFoundException   if the user is not found by email.
      * @throws NoSubscribedThemesException if the user has no subscribed themes.
-     * @throws NoArticlesFoundException if no articles are found for the subscribed themes.
+     * @throws NoArticlesFoundException    if no articles are found for the subscribed themes.
      */
     public List<ArticleResponse> getArticlesForCurrentUser(String userEmail) {
         User user = userRepository.findByEmail(userEmail)
@@ -75,7 +75,10 @@ public class ArticlesService {
         }
 
         return articles.stream()
-                .map(ArticleResponse::new)
+                .map(article -> {
+                    String author = userRepository.findUsernameById(article.getUserId());
+                    return new ArticleResponse(article, author);
+                })
                 .collect(Collectors.toList());
     }
 
@@ -85,7 +88,7 @@ public class ArticlesService {
      * @param articleRequest The request containing article data.
      * @param userEmail      Email of the user creating the article.
      * @throws UsernameNotFoundException if the user is not found.
-     * @throws EntityNotFoundException if the theme is not found.
+     * @throws EntityNotFoundException   if the theme is not found.
      */
     public void createArticle(ArticleRequest articleRequest, String userEmail) {
         User user = userRepository.findByEmail(userEmail)
@@ -114,8 +117,8 @@ public class ArticlesService {
     public ArticleResponse getArticleById(Integer articleId) {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new EntityNotFoundException("Article not found with ID: " + articleId));
-
-        return new ArticleResponse(article);
+        String author = userRepository.findUsernameById(article.getUserId());
+        return new ArticleResponse(article, author);
     }
 
 }

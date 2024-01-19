@@ -1,0 +1,35 @@
+@import '../../styles/styles';
+
+section {
+    @include flex($direction: column);
+
+    h1 {
+        color: $black;
+        text-align: center;
+        font-family: $fontTitle;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    form {
+        @include flex($direction: column);
+        width: 20%;
+        margin-top: 3rem;
+
+        .mat-form-field {
+            width: 100%;
+        }
+
+        button {
+            width: 40%;
+        }
+
+        textarea {
+            min-height: 150px;
+            margin-bottom: 2rem;
+            resize: none;
+        }
+    }
+}

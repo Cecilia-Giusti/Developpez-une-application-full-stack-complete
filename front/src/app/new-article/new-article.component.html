@@ -1,0 +1,39 @@
+<div>
+
+<app-header></app-header>
+
+<section class="form-container">
+    <h1>Créer un nouvel article</h1>
+    <!-- <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div> -->
+    <form #newArticleForm="ngForm" (ngSubmit)="submit(newArticleForm)">
+      <mat-form-field>
+        <mat-label>Sélectionner un thème</mat-label>
+        <mat-select [(ngModel)]="article.themeId" name="theme">
+             <mat-option *ngFor="let theme of themes" [value]="theme.id">
+                {{ theme.name }}
+            </mat-option>  
+          </mat-select>
+      </mat-form-field>
+ 
+      <mat-form-field *ngIf="newArticleForm" [floatLabel]="'auto'">
+        <mat-label>Titre de l'article</mat-label>
+        <input matInput name="title" [(ngModel)]="article.title" required >
+        <mat-error *ngIf="newArticleForm.controls['title'].errors?.['required']">
+          Veuillez écrire un titre pour votre article
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field *ngIf="newArticleForm" [floatLabel]="'auto'">
+        <mat-label>Contenu de l’article</mat-label>
+        <textarea matInput name="content" [(ngModel)]="article.content" required ></textarea>
+        <mat-error *ngIf="newArticleForm.controls['content'].errors?.['required']">
+          Veuillez écrire un contenu pour votre article
+        </mat-error>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit" [disabled]="newArticleForm.invalid">Créer</button>
+    </form>
+  </section>
+</div>

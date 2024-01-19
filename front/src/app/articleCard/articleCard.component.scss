@@ -1,0 +1,69 @@
+@import '../../styles/styles';
+
+
+.article {
+    &-card {
+        background: $grey-light;
+        border-radius: 8px;
+        cursor: pointer;
+        width: auto;
+        margin: auto;
+        height: 180px;
+        overflow: hidden;
+        white-space: pre-line;
+        white-space: pre-line;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        @include screen-max($mobileBreakpoint) {
+            width: initial;
+            margin: initial;
+        }
+    }
+
+    &-title {
+        color: $black;
+        font-family: $fontTitle;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    &-date,
+    &-author {
+        color: #000;
+        font-family: $fontTitle;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    &-content {
+        color: $black;
+        font-family: $fontTitle;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+        p {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 100px;
+
+        }
+
+    }
+
+}
+
+.mat-card {
+
+    &-subtitle {
+        @include flex($justify: flex-start);
+        gap: 5rem;
+        padding: 1rem 0 0.5rem;
+    }
+}
