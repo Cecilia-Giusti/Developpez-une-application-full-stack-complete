@@ -15,7 +15,7 @@ public class ArticleResponse {
 
     private Integer id;
     private String author;
-    private Integer themeId;
+    private String theme;
     private String title;
     private String content;
     private LocalDateTime createdAt;
@@ -27,10 +27,10 @@ public class ArticleResponse {
      * @param article   The article with all fields .
      * @param author    The name of the user who created the article.
      */
-    public ArticleResponse(Article article, String author) {
+    public ArticleResponse(Article article, String author,String theme) {
         this.id = article.getId();
         this.author = author;
-        this.themeId = article.getThemeId();
+        this.theme = theme;
         this.title = article.getTitle();
         this.content = article.getContent();
         this.createdAt = article.getCreatedAt();
