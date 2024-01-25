@@ -44,7 +44,6 @@ import { LogoutComponent } from './logout/logout.component';
     ThemesComponent,
     ThemeCardComponent,
     ProfileComponent,
-    LogoutComponent,
   ],
   providers: [
     {
@@ -71,6 +70,7 @@ import { LogoutComponent } from './logout/logout.component';
     MatCardModule,
     HeaderComponent,
     MatSelectModule,
+    LogoutComponent,
   ],
 })
 export class AppModule {
