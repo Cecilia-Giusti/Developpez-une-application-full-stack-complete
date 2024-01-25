@@ -73,7 +73,11 @@ export class CommentComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Sends a true value to `destroy$` to indicate that the component is about to be destroyed.
+   */
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

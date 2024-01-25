@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+} from '@angular/core';
 import { Theme } from '../core/models/theme.model';
 import { Subject, takeUntil } from 'rxjs';
 import { SubscriptionService } from '../core/services/subscription.service';
@@ -8,7 +14,7 @@ import { SubscriptionService } from '../core/services/subscription.service';
   templateUrl: './theme-card.component.html',
   styleUrls: ['./theme-card.component.scss'],
 })
-export class ThemeCardComponent implements OnInit {
+export class ThemeCardComponent implements OnDestroy {
   @Input() theme?: Theme;
   @Output() subscriptionChanged = new EventEmitter<number>();
 
@@ -17,8 +23,6 @@ export class ThemeCardComponent implements OnInit {
   message: String | undefined;
 
   constructor(private subscriptionService: SubscriptionService) {}
-
-  ngOnInit(): void {}
 
   subscribe() {
     this.destroy$ = new Subject<boolean>();
@@ -40,5 +44,13 @@ export class ThemeCardComponent implements OnInit {
           },
         });
     }
+  }
+
+  /**
+   * Sends a true value to `destroy$` to indicate that the component is about to be destroyed.
+   */
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

@@ -40,7 +40,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         },
       });
   }
-
   submit(form: NgForm) {
     this.destroy$ = new Subject<boolean>();
     if (form.valid) {
@@ -49,7 +48,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
         .pipe(takeUntil(this.destroy$))
         .subscribe({
           next: (response) => {
-            console.log(response);
             localStorage.setItem('token', response.token);
             this.ngOnInit();
           },
@@ -61,7 +59,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Sends a true value to `destroy$` to indicate that the component is about to be destroyed.
+   */
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

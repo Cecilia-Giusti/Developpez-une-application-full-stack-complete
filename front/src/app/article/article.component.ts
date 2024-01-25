@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ArticleResponse } from '../core/models/response/article-response';
 import { ArticleService } from '../core/services/article.service';
@@ -9,7 +9,7 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './article.component.html',
   styleUrls: ['./article.component.scss'],
 })
-export class ArticleComponent implements OnInit {
+export class ArticleComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject();
   articleId: number | null | undefined;
   article: ArticleResponse | null = null;
@@ -39,5 +39,11 @@ export class ArticleComponent implements OnInit {
     }
   }
 
-  //ondestroy
+  /**
+   * Sends a true value to `destroy$` to indicate that the component is about to be destroyed.
+   */
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
+  }
 }
