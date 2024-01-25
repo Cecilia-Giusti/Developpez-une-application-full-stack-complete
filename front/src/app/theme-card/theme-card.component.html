@@ -1,0 +1,18 @@
+<mat-card *ngIf="theme" class="theme-card">
+    <mat-card-header>
+      <mat-card-title class="theme-title">{{ theme.name }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="theme-content">
+      <p>{{theme.description }}</p>
+    </mat-card-content>
+
+   
+    <button 
+        mat-raised-button 
+        [color]="theme.isSubscribed ? 'accent' : 'primary'" 
+        (click)="theme.isSubscribed ? null : subscribe()"
+        [disabled]="theme.isSubscribed">
+        {{ theme.isSubscribed ? 'Abonné' : "S'abonner" }}
+    </button>
+
+  </mat-card>

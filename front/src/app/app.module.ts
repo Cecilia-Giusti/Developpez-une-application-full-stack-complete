@@ -25,6 +25,8 @@ import { NewArticleComponent } from './new-article/new-article.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ArticleComponent } from './article/article.component';
 import { CommentComponent } from './comment/comment.component';
+import { ThemesComponent } from './themes/themes.component';
+import { ThemeCardComponent } from './theme-card/theme-card.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { CommentComponent } from './comment/comment.component';
     NewArticleComponent,
     ArticleComponent,
     CommentComponent,
+    ThemesComponent,
+    ThemeCardComponent,
   ],
   providers: [
     {

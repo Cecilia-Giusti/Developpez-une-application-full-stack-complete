@@ -3,4 +3,5 @@ export interface Theme {
   name: string;
   description: string;
   createdAt: string;
+  isSubscribed: boolean;
 }

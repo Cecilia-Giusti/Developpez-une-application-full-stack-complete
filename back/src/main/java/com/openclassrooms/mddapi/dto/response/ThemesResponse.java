@@ -27,14 +27,4 @@ public class ThemesResponse {
     public ThemesResponse(List<Theme> themes) {
         this.themes = themes;
     }
-
-    /**
-     * Sets the list of themes in the response.
-     * This method allows updating the list of Theme objects encapsulated in this response object.
-     *
-     * @param themes A list of Theme objects to be set.
-     */
-    public void setRentals(List<Theme> themes) {
-        this.themes = themes;
-    }
 }
