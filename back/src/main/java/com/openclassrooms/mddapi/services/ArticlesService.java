@@ -77,7 +77,8 @@ public class ArticlesService {
         return articles.stream()
                 .map(article -> {
                     String author = userRepository.findUsernameById(article.getUserId());
-                    return new ArticleResponse(article, author);
+                    String theme = themeRepository.findNameById(article.getThemeId());
+                    return new ArticleResponse(article, author, theme);
                 })
                 .collect(Collectors.toList());
     }
@@ -118,7 +119,8 @@ public class ArticlesService {
         Article article = articleRepository.findById(articleId)
                 .orElseThrow(() -> new EntityNotFoundException("Article not found with ID: " + articleId));
         String author = userRepository.findUsernameById(article.getUserId());
-        return new ArticleResponse(article, author);
+        String theme = themeRepository.findNameById(article.getThemeId());
+        return new ArticleResponse(article, author, theme);
     }
 
 }

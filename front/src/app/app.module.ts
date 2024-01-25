@@ -24,6 +24,7 @@ import { registerLocaleData } from '@angular/common';
 import { NewArticleComponent } from './new-article/new-article.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ArticleComponent } from './article/article.component';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ArticleComponent } from './article/article.component';
     ArticleCardComponent,
     NewArticleComponent,
     ArticleComponent,
+    CommentComponent,
   ],
   providers: [
     {
@@ -79,6 +81,10 @@ export class AppModule {
     this.matIconRegistry.addSvgIcon(
       'burger',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/burger.svg')
+    );
+    this.matIconRegistry.addSvgIcon(
+      'send',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/send.svg')
     );
     registerLocaleData(fr.default);
   }

@@ -1,9 +1,10 @@
 package com.openclassrooms.mddapi.services;
 
+import com.openclassrooms.mddapi.dto.request.CommentRequest;
+import com.openclassrooms.mddapi.dto.response.CommentResponse;
 import com.openclassrooms.mddapi.models.Article;
 import com.openclassrooms.mddapi.models.Comment;
 import com.openclassrooms.mddapi.models.User;
-import com.openclassrooms.mddapi.dto.request.CommentRequest;
 import com.openclassrooms.mddapi.repository.ArticleRepository;
 import com.openclassrooms.mddapi.repository.CommentRepository;
 import com.openclassrooms.mddapi.repository.SubscriptionRepository;
@@ -16,6 +17,8 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 /**
  * Service class for managing comments.
@@ -46,7 +49,7 @@ public class CommentService {
      * @throws EntityNotFoundException if the article is not found.
      * @throws AccessDeniedException if the user is not subscribed to the theme of the article.
      */
-    public List<Comment> getCommentsByArticleId(Integer articleId, String userEmail) {
+    public List<CommentResponse> getCommentsByArticleId(Integer articleId, String userEmail) {
         User user = userRepository.findByEmail(userEmail)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
 
@@ -58,7 +61,14 @@ public class CommentService {
             throw new AccessDeniedException("User is not subscribed to the theme of this article");
         }
 
-        return commentRepository.findByArticleId(articleId);
+        List<Comment> comments= commentRepository.findByArticleId(articleId);
+
+        return comments.stream()
+                .map(comment -> {
+                    String author = userRepository.findUsernameById(comment.getUserId());
+                    return new CommentResponse(comment, author);
+                })
+                .collect(Collectors.toList());
     }
 
     /**
@@ -91,5 +101,4 @@ public class CommentService {
 
         commentRepository.save(comment);
     }
-
 }

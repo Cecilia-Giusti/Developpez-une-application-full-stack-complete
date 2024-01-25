@@ -1,8 +1,9 @@
 export interface ArticleResponse {
   id: number;
   userId: number;
-  author: string;
   themeId: number;
+  author: string;
+  theme: String;
   title: string;
   content: string;
   createdAt: Date;
