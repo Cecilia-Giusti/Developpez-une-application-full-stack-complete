@@ -1,12 +1,18 @@
 <div>
     <section>
         <h2>Commentaires</h2>
-        <div class="comments-content"> // faire le for ici 
-            <p class="comments-content-author">Username</p>
-            <p class="comments-content-comment">Contenu du commentaire</p>
+        <div class="comments-content" *ngFor="let comment of comments">
+            <p class="comments-content-author">{{comment.author}}</p>
+            <p class="comments-content-comment">{{comment.content}}</p>
         </div>
 
         // ajouter l'ajout d'un commentaire avec un form textarea
-      
+        <form #CommentForm="ngForm" (ngSubmit)="submit(CommentForm)">
+            <mat-form-field>
+                <mat-label>Ecrivez ici votre commentaire</mat-label>
+                <textarea matInput name="content" [(ngModel)]="newComment.content" required></textarea>
+            </mat-form-field>
+            <button type="submit" [disabled]="CommentForm.invalid"><mat-icon svgIcon="send"></mat-icon></button>
+        </form>        
     </section>
 </div>

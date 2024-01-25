@@ -82,6 +82,10 @@ export class AppModule {
       'burger',
       this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/burger.svg')
     );
+    this.matIconRegistry.addSvgIcon(
+      'send',
+      this.domSanitizer.bypassSecurityTrustResourceUrl('../assets/send.svg')
+    );
     registerLocaleData(fr.default);
   }
 }
