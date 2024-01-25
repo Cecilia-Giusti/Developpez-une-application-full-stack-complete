@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, switchMap, takeUntil } from 'rxjs';
-import { ThemeService } from '../core/services/theme.service';
-import { Theme } from '../core/models/theme.model';
-import { SubscriptionService } from '../core/services/subscription.service';
+import { ThemeService } from '../../core/services/theme.service';
+import { Theme } from '../../core/models/theme.model';
+import { SubscriptionService } from '../../core/services/subscription.service';
 
 @Component({
   selector: 'app-themes',

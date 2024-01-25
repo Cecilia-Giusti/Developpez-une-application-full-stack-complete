@@ -6,7 +6,8 @@ import { RegisterComponent } from './pages/register/register.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { NewArticleComponent } from './new-article/new-article.component';
 import { ArticleComponent } from './article/article.component';
-import { ThemesComponent } from './themes/themes.component';
+import { ThemesComponent } from './pages/themes/themes.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 /**
  * Defines the routes for the application.
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'article', component: NewArticleComponent },
   { path: 'article/:id', component: ArticleComponent },
   { path: 'themes', component: ThemesComponent },
+  { path: 'profile', component: ProfileComponent },
 ];
 
 @NgModule({

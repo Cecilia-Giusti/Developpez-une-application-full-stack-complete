@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Theme } from '../core/models/theme.model';
 import { Subject, takeUntil } from 'rxjs';
 import { SubscriptionService } from '../core/services/subscription.service';
@@ -10,6 +10,7 @@ import { SubscriptionService } from '../core/services/subscription.service';
 })
 export class ThemeCardComponent implements OnInit {
   @Input() theme?: Theme;
+  @Output() subscriptionChanged = new EventEmitter<number>();
 
   private destroy$: Subject<boolean> = new Subject();
   themeId: number | undefined;
@@ -31,6 +32,7 @@ export class ThemeCardComponent implements OnInit {
           next: (response) => {
             this.message = response.message;
             console.log(this.message);
+            this.subscriptionChanged.emit(this.themeId);
           },
           error: (error) => {
             console.error(error);
