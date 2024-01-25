@@ -28,6 +28,7 @@ import { CommentComponent } from './comment/comment.component';
 import { ThemesComponent } from './pages/themes/themes.component';
 import { ThemeCardComponent } from './theme-card/theme-card.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { ProfileComponent } from './pages/profile/profile.component';
     ThemesComponent,
     ThemeCardComponent,
     ProfileComponent,
+    LogoutComponent,
   ],
   providers: [
     {
