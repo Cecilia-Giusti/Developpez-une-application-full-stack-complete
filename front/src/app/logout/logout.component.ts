@@ -12,9 +12,7 @@ export class LogoutComponent {
   constructor(private router: Router) {}
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userId');
-    localStorage.removeItem('showIcon');
+    localStorage.clear();
     this.router.navigate(['']);
   }
 }

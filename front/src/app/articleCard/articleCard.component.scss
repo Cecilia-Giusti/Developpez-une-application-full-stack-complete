@@ -8,7 +8,7 @@
         cursor: pointer;
         width: auto;
         margin: auto;
-        height: 15rem;
+        height: 100%;
 
         @include screen-max($mobileBreakpoint) {
             width: initial;

@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { RegisterRequest } from 'src/app/core/models/request/register-request.model';
 import { LoginRequest } from '../models/request/login-request.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ import { LoginRequest } from '../models/request/login-request.model';
 export class AuthService {
   private baseUrl = 'http://localhost:8080/auth';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   registerUser(registerRequest: RegisterRequest): Observable<any> {
     return this.http.post(`${this.baseUrl}/register`, registerRequest).pipe(
@@ -67,5 +68,10 @@ export class AuthService {
         break;
     }
     return throwError(errorMessage);
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['']);
   }
 }
