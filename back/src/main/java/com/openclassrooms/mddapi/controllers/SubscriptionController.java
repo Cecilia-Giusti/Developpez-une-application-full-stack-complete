@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.controllers;
 
 import com.openclassrooms.mddapi.dto.response.MessageResponse;
+import com.openclassrooms.mddapi.models.Theme;
 import com.openclassrooms.mddapi.services.SubscriptionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,5 +69,18 @@ public class SubscriptionController {
         subscriptionService.deleteSubscription(userEmail, themeId);
 
         return ResponseEntity.noContent().build();
+    }
+
+    /**
+     * Retrieves a list of theme IDs to which the current user is subscribed.
+     *
+     * @param authentication The security context of the authenticated user.
+     * @return A ResponseEntity containing a list of subscribed theme IDs.
+     */
+    @GetMapping("/all")
+    public ResponseEntity<List<Theme>> getAllSubscriptionsForCurrentUser(Authentication authentication) {
+        String userEmail = authentication.getName();
+        List<Theme> themes = subscriptionService.getThemesForCurrentUser(userEmail);
+        return ResponseEntity.ok(themes);
     }
 }

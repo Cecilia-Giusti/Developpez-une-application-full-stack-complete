@@ -29,6 +29,8 @@ import { ThemesComponent } from './pages/themes/themes.component';
 import { ThemeCardComponent } from './theme-card/theme-card.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { LogoutComponent } from './logout/logout.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
+import { ErrorMessageComponent } from './error-message/error-message.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +46,8 @@ import { LogoutComponent } from './logout/logout.component';
     ThemesComponent,
     ThemeCardComponent,
     ProfileComponent,
+    SubscriptionComponent,
+    ErrorMessageComponent,
   ],
   providers: [
     {

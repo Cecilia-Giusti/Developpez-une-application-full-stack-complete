@@ -36,7 +36,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
         },
         error: (error) => {
           this.errorMessage =
-            error || 'Une erreur est survenue lors de l’inscription.';
+            error ||
+            'Une erreur est survenue lors du chargement de votre page.';
         },
       });
   }

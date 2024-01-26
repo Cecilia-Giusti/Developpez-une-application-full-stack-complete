@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   isAscending: boolean = true;
   sortedArticles$: Observable<ArticleResponse[]> | undefined;
   private destroy$: Subject<boolean> = new Subject();
+  errorMessage: string = '';
 
   constructor(
     private articleService: ArticleService,
@@ -36,7 +37,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
           localStorage.setItem('userId', response.id);
         },
         error: (error) => {
-          console.log(error);
+          this.errorMessage =
+            error ||
+            'Une erreur est survenue lors du chargement de votre Dashboard.';
         },
       });
   }

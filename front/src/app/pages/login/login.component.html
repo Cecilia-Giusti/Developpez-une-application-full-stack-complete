@@ -3,9 +3,7 @@
 
 <section class="form-container">
   <h1>Se connecter</h1>
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
-  </div>
+  <app-error-message [errorMessage]="errorMessage" ></app-error-message>
   <form #LoginForm="ngForm" (ngSubmit)="submit(LoginForm)">
 
     <mat-form-field>

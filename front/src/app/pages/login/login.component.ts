@@ -33,7 +33,6 @@ export class LoginComponent implements OnDestroy {
             (this.errorMessage = ''),
               localStorage.setItem('token', response.token);
             this.router.navigate(['/dashboard']);
-            //ACCEPTER USERNAME
           },
           error: (error) => {
             this.errorMessage =

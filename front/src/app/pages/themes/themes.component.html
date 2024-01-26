@@ -1,9 +1,9 @@
 <div>
 <app-header></app-header>
 <section class="feed">
+    <app-error-message [errorMessage]="errorMessage" ></app-error-message>
      <article *ngFor="let theme of themes">
-        <app-theme-card [theme]="theme" (onSubscriptionChange)="onThemeSubscriptionChange()"></app-theme-card>
+        <app-theme-card [theme]="theme" [isSubscriptionView]="false" (subscriptionChanged)="onSubscriptionChange()"></app-theme-card>
     </article> 
-
 </section>
 </div>

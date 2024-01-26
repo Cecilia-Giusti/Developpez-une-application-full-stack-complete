@@ -13,6 +13,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject();
   articleId: number | null | undefined;
   article: ArticleResponse | null = null;
+  errorMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -33,7 +34,9 @@ export class ArticleComponent implements OnInit, OnDestroy {
             this.article = articleResponse;
           },
           error: (error) => {
-            //gestion de l'erreur
+            this.errorMessage =
+              error ||
+              "Une erreur est survenue lors du chargement de l'article";
           },
         });
     }

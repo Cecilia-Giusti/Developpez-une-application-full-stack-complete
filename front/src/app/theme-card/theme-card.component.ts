@@ -16,11 +16,14 @@ import { SubscriptionService } from '../core/services/subscription.service';
 })
 export class ThemeCardComponent implements OnDestroy {
   @Input() theme?: Theme;
-  @Output() subscriptionChanged = new EventEmitter<number>();
+  @Input() isSubscriptionView: boolean = false;
+  @Output() subscriptionChanged = new EventEmitter<void>();
+  @Output() unsubscribeEvent = new EventEmitter<number>();
 
   private destroy$: Subject<boolean> = new Subject();
   themeId: number | undefined;
   message: String | undefined;
+  errorMessage: String = '';
 
   constructor(private subscriptionService: SubscriptionService) {}
 
@@ -35,12 +38,33 @@ export class ThemeCardComponent implements OnDestroy {
         .subscribe({
           next: (response) => {
             this.message = response.message;
-            console.log(this.message);
-            this.subscriptionChanged.emit(this.themeId);
+            this.subscriptionChanged.emit();
+            this.unsubscribeEvent.emit(this.theme?.id);
           },
           error: (error) => {
-            console.error(error);
-            //Gérer les erreurs
+            this.errorMessage =
+              error || 'Une erreur est survenue lors de votre souscription.';
+          },
+        });
+    }
+  }
+
+  unsubscribe() {
+    this.destroy$ = new Subject<boolean>();
+    if (this.theme) {
+      this.themeId = this.theme.id;
+
+      this.subscriptionService
+        .deleteSubscription(this.themeId)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: (response) => {
+            this.unsubscribeEvent.emit(this.themeId);
+          },
+          error: (error) => {
+            this.errorMessage =
+              error ||
+              'Une erreur est survenue lors du chargement de votre désabonnement.';
           },
         });
     }

@@ -13,6 +13,7 @@ export class ThemesComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject();
   themes: Theme[] | undefined;
   subscriptions: number[] = [];
+  errorMessage: string = '';
 
   constructor(
     private themeService: ThemeService,
@@ -20,6 +21,10 @@ export class ThemesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.getAllThemesWithSubscription();
+  }
+
+  getAllThemesWithSubscription() {
     this.destroy$ = new Subject<boolean>();
     this.themeService
       .getAllThemes()
@@ -36,7 +41,8 @@ export class ThemesComponent implements OnInit, OnDestroy {
           this.updateSubscription();
         },
         error: (error) => {
-          // Gérer les erreurs
+          this.errorMessage =
+            error || 'Une erreur est survenue lors du chargement des thèmes.';
         },
       });
   }
@@ -52,8 +58,8 @@ export class ThemesComponent implements OnInit, OnDestroy {
     }
   }
 
-  onThemeSubscriptionChange() {
-    this.ngOnInit();
+  onSubscriptionChange(): void {
+    this.getAllThemesWithSubscription();
   }
 
   /**

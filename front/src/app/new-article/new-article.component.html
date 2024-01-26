@@ -4,9 +4,7 @@
 
 <section class="form-container">
     <h1>Créer un nouvel article</h1>
-    <!-- <div *ngIf="errorMessage" class="error-message">
-      {{ errorMessage }}
-    </div> -->
+    <app-error-message [errorMessage]="errorMessage" ></app-error-message>
     <form #newArticleForm="ngForm" (ngSubmit)="submit(newArticleForm)">
       <mat-form-field>
         <mat-label>Sélectionner un thème</mat-label>

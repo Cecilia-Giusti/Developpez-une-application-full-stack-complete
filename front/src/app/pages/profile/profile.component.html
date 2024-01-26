@@ -1,7 +1,7 @@
 <div>
     <app-header></app-header>
     <h1>Profil utilisateur</h1>
-
+    <app-error-message [errorMessage]="errorMessage" ></app-error-message>
     <form action="">
         <form #profileForm="ngForm" (ngSubmit)="submit(profileForm)">
             <mat-form-field>
@@ -29,4 +29,6 @@
     </form>
 
    <app-logout></app-logout>
+
+   <app-subscription></app-subscription>
 </div>

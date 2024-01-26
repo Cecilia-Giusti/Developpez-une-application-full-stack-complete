@@ -19,6 +19,7 @@ export class CommentComponent implements OnInit, OnDestroy {
     content: '',
   };
   message: String | undefined;
+  errorMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -66,8 +67,9 @@ export class CommentComponent implements OnInit, OnDestroy {
             this.ngOnInit();
           },
           error: (error) => {
-            console.error(error);
-            //Gérer les erreurs
+            this.errorMessage =
+              error ||
+              'Une erreur est survenue lors du chargement des commentaires.';
           },
         });
     }
