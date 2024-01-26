@@ -1,6 +1,7 @@
 <div>
     <section>
         <h2>Commentaires</h2>
+        <app-error-message [errorMessage]="errorMessage" ></app-error-message>
         <div class="comments-content" *ngFor="let comment of comments">
             <p class="comments-content-author">{{comment.author}}</p>
             <p class="comments-content-comment">{{comment.content}}</p>

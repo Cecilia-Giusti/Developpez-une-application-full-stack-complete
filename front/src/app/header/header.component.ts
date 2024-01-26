@@ -45,4 +45,9 @@ export class HeaderComponent {
       this.router.url !== ''
     );
   }
+
+  isAuthPage(): boolean {
+    const authRoutes = ['/', '/login', '/register'];
+    return authRoutes.includes(this.router.url);
+  }
 }

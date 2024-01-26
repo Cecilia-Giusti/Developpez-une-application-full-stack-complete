@@ -3,6 +3,10 @@
 img {
     width: 20%;
     @include margin-horizontal($marginContainerHeader);
+
+    @include screen-max($mobileBreakpoint) {
+        width: 35%;
+    }
 }
 
 .page-auth {
@@ -14,7 +18,7 @@ img {
 
     img {
         @include screen-max($mobileBreakpoint) {
-            width: 60%;
+            width: 90%;
         }
     }
 }

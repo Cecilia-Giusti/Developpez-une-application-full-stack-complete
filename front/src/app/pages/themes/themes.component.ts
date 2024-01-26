@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, switchMap, takeUntil } from 'rxjs';
-import { ThemeService } from '../core/services/theme.service';
-import { Theme } from '../core/models/theme.model';
-import { SubscriptionService } from '../core/services/subscription.service';
+import { ThemeService } from '../../core/services/theme.service';
+import { Theme } from '../../core/models/theme.model';
+import { SubscriptionService } from '../../core/services/subscription.service';
 
 @Component({
   selector: 'app-themes',
@@ -13,6 +13,7 @@ export class ThemesComponent implements OnInit, OnDestroy {
   private destroy$: Subject<boolean> = new Subject();
   themes: Theme[] | undefined;
   subscriptions: number[] = [];
+  errorMessage: string = '';
 
   constructor(
     private themeService: ThemeService,
@@ -20,6 +21,10 @@ export class ThemesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.getAllThemesWithSubscription();
+  }
+
+  getAllThemesWithSubscription() {
     this.destroy$ = new Subject<boolean>();
     this.themeService
       .getAllThemes()
@@ -36,7 +41,8 @@ export class ThemesComponent implements OnInit, OnDestroy {
           this.updateSubscription();
         },
         error: (error) => {
-          // Gérer les erreurs
+          this.errorMessage =
+            error || 'Une erreur est survenue lors du chargement des thèmes.';
         },
       });
   }
@@ -52,11 +58,15 @@ export class ThemesComponent implements OnInit, OnDestroy {
     }
   }
 
-  onThemeSubscriptionChange() {
-    this.ngOnInit();
+  onSubscriptionChange(): void {
+    this.getAllThemesWithSubscription();
   }
 
+  /**
+   * Sends a true value to `destroy$` to indicate that the component is about to be destroyed.
+   */
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

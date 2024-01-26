@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subject, map, of, takeUntil } from 'rxjs';
 import { ArticleResponse } from 'src/app/core/models/response/article-response';
 import { UserResponse } from 'src/app/core/models/response/user-response';
@@ -10,12 +10,13 @@ import { UserService } from 'src/app/core/services/user.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit, OnDestroy {
   articles$: Observable<ArticleResponse[]> | undefined;
   user$: Observable<UserResponse> | undefined;
   isAscending: boolean = true;
   sortedArticles$: Observable<ArticleResponse[]> | undefined;
   private destroy$: Subject<boolean> = new Subject();
+  errorMessage: string = '';
 
   constructor(
     private articleService: ArticleService,
@@ -36,7 +37,9 @@ export class DashboardComponent {
           localStorage.setItem('userId', response.id);
         },
         error: (error) => {
-          console.log(error);
+          this.errorMessage =
+            error ||
+            'Une erreur est survenue lors du chargement de votre Dashboard.';
         },
       });
   }
@@ -50,8 +53,8 @@ export class DashboardComponent {
               let dateB = new Date(b.createdAt);
 
               return this.isAscending
-                ? dateA.getTime() - dateB.getTime()
-                : dateB.getTime() - dateA.getTime();
+                ? dateB.getTime() - dateA.getTime()
+                : dateA.getTime() - dateB.getTime();
             })
           )
         )
@@ -61,5 +64,13 @@ export class DashboardComponent {
   changeSort() {
     this.isAscending = !this.isAscending;
     this.sortedArticles$ = this.sortArticles();
+  }
+
+  /**
+   * Sends a true value to `destroy$` to indicate that the component is about to be destroyed.
+   */
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

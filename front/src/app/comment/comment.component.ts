@@ -19,6 +19,7 @@ export class CommentComponent implements OnInit, OnDestroy {
     content: '',
   };
   message: String | undefined;
+  errorMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -66,14 +67,19 @@ export class CommentComponent implements OnInit, OnDestroy {
             this.ngOnInit();
           },
           error: (error) => {
-            console.error(error);
-            //Gérer les erreurs
+            this.errorMessage =
+              error ||
+              'Une erreur est survenue lors du chargement des commentaires.';
           },
         });
     }
   }
 
+  /**
+   * Sends a true value to `destroy$` to indicate that the component is about to be destroyed.
+   */
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 }

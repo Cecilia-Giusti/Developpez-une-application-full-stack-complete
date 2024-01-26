@@ -1,13 +1,14 @@
 <div>
     <app-header></app-header>
+    <app-error-message [errorMessage]="errorMessage" ></app-error-message>
     <div class="dashboard-header">
+
         <a mat-flat-button color=primary routerLink="/article">Créer un article</a>
 
         <button mat-icon-button (click)="changeSort()">
            Trier par  <mat-icon class="{{ isAscending ? 'arrow-up' : 'arrow-down' }}"  svgIcon="arrow"></mat-icon>
         </button>
     </div>
-
 
     <section class="feed">
         <article *ngFor="let article of sortedArticles$ | async">

@@ -1,5 +1,7 @@
 package com.openclassrooms.mddapi.controllers;
 
+import com.openclassrooms.mddapi.dto.response.JwtResponse;
+import com.openclassrooms.mddapi.dto.response.ProfileUpdateResponse;
 import com.openclassrooms.mddapi.models.User;
 import com.openclassrooms.mddapi.dto.request.UserRequest;
 import com.openclassrooms.mddapi.dto.response.MessageResponse;
@@ -25,6 +27,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private com.openclassrooms.mddapi.security.jwt.JwtUtils jwtUtils;
+
     /**
      * Retrieves the profile information of the currently authenticated user.
      *
@@ -41,15 +46,20 @@ public class UserController {
      * Updates the profile information of the currently authenticated user.
      *
      * @param userRequest The user's updated profile data.
-     * @return A ResponseEntity containing a MessageResponse indicating a successful update.
+     * @return A ResponseEntity containing a ProfilUpdateResponse when successfully.
      */
     @PutMapping("/profile")
-    public ResponseEntity<MessageResponse> updateUser(@RequestBody @Valid UserRequest userRequest) {
+    public ResponseEntity<?> updateUser(@RequestBody @Valid UserRequest userRequest) {
+
         User user = userService.updateUser(userRequest);
 
-        MessageResponse response = new MessageResponse("Profile updated !");
-        return ResponseEntity.ok(response);
+            String token = jwtUtils.generateToken(user.getEmail());
+            ProfileUpdateResponse profileUpdateResponse = new ProfileUpdateResponse(token, "Profile updated");
+
+            return ResponseEntity.ok(profileUpdateResponse);
+
     }
+
 }
 
 

@@ -1,0 +1,36 @@
+<div>
+    <app-header></app-header>
+    <section>
+    <h1>Profil utilisateur</h1>
+    <app-error-message [errorMessage]="errorMessage" ></app-error-message>
+    <form action="">
+        <form #profileForm="ngForm" (ngSubmit)="submit(profileForm)">
+            <mat-form-field>
+                <mat-label>Nom d'utilisateur</mat-label>
+                <input matInput placeholder="Nom d'utilisateur" name="username" [(ngModel)]="user.username" required
+                    #username="ngModel">
+                <mat-error *ngIf=" username.errors?.['required']">
+                    Le nom d'utilisateur est requis.
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Adresse e-mail</mat-label>
+                <input matInput type="email" placeholder="Adresse e-mail" name="email" [(ngModel)]="user.email" required
+                    email #email="ngModel">
+                <mat-error *ngIf=" email.errors?.['required']">
+                    L'adresse e-mail est requise.
+                </mat-error>
+                <mat-error *ngIf=" email.errors?.['email']">
+                    L'adresse e-mail n'est pas valide.
+                </mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" type="submit" [disabled]="profileForm.invalid">Sauvegarder</button>
+        </form>
+    </form>
+
+   <app-logout></app-logout>
+
+   <app-subscription></app-subscription>
+</section>
+</div>

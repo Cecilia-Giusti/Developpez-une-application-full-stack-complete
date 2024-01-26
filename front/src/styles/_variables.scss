@@ -5,15 +5,17 @@ $red: #f44336;
 $grey: #D9D9D9;
 $grey-light: #F5F5F5;
 $purple: #6C5CCF;
+$purple-dark: hsl(248, 44%, 43%);
 
 
 //-------- SIZE ---------------
 
 $mobileBreakpoint: 768px;
+$largeBreakpoint: 1920px;
 
 $marginContainer: 3rem;
 $marginContainerHeader: $marginContainer /2;
-$maxScreen: 1600px;
+$maxScreen: $largeBreakpoint;
 
 //-------- FONTS ---------------
 $fontTitle : 'Inter',

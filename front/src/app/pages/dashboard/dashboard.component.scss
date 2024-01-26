@@ -7,22 +7,55 @@
 
     max-width: $maxScreen;
 
+    @include screen-max($mobileBreakpoint) {
+        flex-direction: column;
+        justify-content: center;
+        gap: 1.8rem;
+    }
+
+    a {
+        @include button-style-base();
+        width: auto;
+        background-color: $purple;
+        transition-duration: 250ms;
+
+        &:hover {
+            background-color: $purple-dark;
+            transition-duration: 250ms;
+        }
+    }
+
     button {
         width: auto;
         color: $black;
         font-family: $fontTitle;
-        font-size: 16px;
+        font-size: 1.6rem;
         font-style: normal;
         font-weight: 700;
         line-height: normal;
+        transition-duration: 250ms;
+
+        &:hover {
+            color: $purple;
+            transition-duration: 250ms;
+        }
+
+
+
+        @include screen-max($mobileBreakpoint) {
+            font-size: 1.4rem;
+        }
     }
 
     .arrow-up {
         rotate: -90deg;
+        transition-duration: 250ms;
     }
+
 
     .arrow-down {
         rotate: 90deg;
+        transition-duration: 250ms;
     }
 
 }

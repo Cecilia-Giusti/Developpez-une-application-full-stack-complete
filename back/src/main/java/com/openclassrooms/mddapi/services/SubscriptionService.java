@@ -90,5 +90,15 @@ public class SubscriptionService {
         subscriptionRepository.delete(subscription);
     }
 
+    public List<Theme> getThemesForCurrentUser(String userEmail) {
+        List<Integer> themes = this.getThemeIdsForCurrentUser(userEmail);
+
+        List<Theme> subscribedThemes =  themeRepository.findAllById(themes);
+
+        if (subscribedThemes.isEmpty()) {
+            throw new NoSubscribedThemesException("User is not subscribed to any themes");
+        }
+        return subscribedThemes;
+    }
 
 }

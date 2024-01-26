@@ -22,6 +22,7 @@ export class NewArticleComponent implements OnInit, OnDestroy {
     content: '',
   };
   message: String | undefined;
+  errorMessage: String = '';
 
   constructor(
     private themeService: ThemeService,
@@ -40,7 +41,8 @@ export class NewArticleComponent implements OnInit, OnDestroy {
           this.themes = response.themes;
         },
         error: (error) => {
-          //Gerer les erreurs
+          this.errorMessage =
+            error || 'Une erreur est survenue lors du chargement des thèmes.';
         },
       });
   }
@@ -65,8 +67,9 @@ export class NewArticleComponent implements OnInit, OnDestroy {
             this.router.navigate(['/dashboard']);
           },
           error: (error) => {
-            console.error(error);
-            //Gérer les erreurs
+            this.errorMessage =
+              error ||
+              'Une erreur est survenue lors de chargement de votre nouvel article.';
           },
         });
     }

@@ -1,0 +1,42 @@
+@import '../../styles/styles';
+
+
+
+.subscription {
+    margin-top: $marginContainer;
+
+    h1 {
+        color: $black;
+
+        font-family: $fontTitle;
+        font-size: 1.5rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin-bottom: 2rem;
+        text-align: center;
+
+        @include screen-max($mobileBreakpoint) {
+            display: none;
+        }
+    }
+
+    &-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        width: 90%;
+        margin: 1rem auto 0;
+        row-gap: 3rem;
+        -moz-column-gap: 3rem;
+        column-gap: 3rem;
+        max-width: $maxScreen;
+
+        @include screen-max($mobileBreakpoint) {
+            @include flex($direction: column);
+            width: 90%;
+            margin: 2rem auto 0;
+            border-top: 1px solid $black;
+            padding-top: 1rem;
+        }
+    }
+}

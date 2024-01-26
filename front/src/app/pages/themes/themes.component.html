@@ -1,0 +1,9 @@
+<div>
+<app-header></app-header>
+<app-error-message [errorMessage]="errorMessage" ></app-error-message>
+<section class="themes">
+     <article *ngFor="let theme of themes">
+        <app-theme-card [theme]="theme" [isSubscriptionView]="false" (subscriptionChanged)="onSubscriptionChange()"></app-theme-card>
+    </article> 
+</section>
+</div>
