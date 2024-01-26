@@ -8,6 +8,7 @@
   @include screen-max($mobileBreakpoint) {
     justify-content: flex-start;
     margin-top: 6rem;
+    gap: 4rem;
   }
 }
 
@@ -15,7 +16,7 @@ img {
   margin: 0 auto;
 
   @include screen-max($mobileBreakpoint) {
-    width: 100%;
+    width: 90%;
   }
 }
 
@@ -25,11 +26,11 @@ img {
 
   @include screen-max($mobileBreakpoint) {
     flex-direction: column;
+    gap: 3rem;
   }
 
   a {
     border-color: $black;
-    width: 100%;
-    min-width: 125px;
+    @include button-style-base();
   }
 }

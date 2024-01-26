@@ -3,6 +3,7 @@
 .previous {
     height: 10vh;
     width: 100%;
+    max-width: $maxScreen;
 
     @include flex($justify: flex-start);
     @include margin-horizontal;

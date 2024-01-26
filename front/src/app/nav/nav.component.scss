@@ -22,6 +22,10 @@
             color: $purple;
             transition-duration: 250ms;
         }
+
+        &:focus {
+            background: none;
+        }
     }
 
     .mat-icon {

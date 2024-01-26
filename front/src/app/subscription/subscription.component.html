@@ -1,9 +1,11 @@
-<div>
-    <section class="feed">
-        <h1>Abonnements</h1>
-        <app-error-message [errorMessage]="errorMessage" ></app-error-message>
-         <article *ngFor="let theme of themes">
-            <app-theme-card [theme]="theme" [isSubscriptionView]="true"   (unsubscribeEvent)="onSubscriptionChange($event)">></app-theme-card>
-        </article> 
+<div class="subscription">
+    <h1>Abonnements</h1>
+    <app-error-message [errorMessage]="errorMessage"></app-error-message>
+
+    <section class="subscription-content">
+        <article *ngFor="let theme of themes">
+            <app-theme-card [theme]="theme" [isSubscriptionView]="true"
+                (unsubscribeEvent)="onSubscriptionChange($event)">></app-theme-card>
+        </article>
     </section>
 </div>

@@ -1,0 +1,23 @@
+@import '../../../styles/styles';
+
+
+.themes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 90%;
+    margin: 5rem auto 0;
+    row-gap: 3rem;
+    -moz-column-gap: 3rem;
+    column-gap: 3rem;
+    max-width: $maxScreen;
+
+    @include screen-max($mobileBreakpoint) {
+        @include flex($direction: column);
+        width: 90%;
+        margin: 3rem auto 0;
+    }
+
+    article {
+        width: 100%;
+    }
+}

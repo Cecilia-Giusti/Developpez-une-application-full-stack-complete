@@ -1,0 +1,18 @@
+@import '../../styles/styles';
+
+button {
+    background: none;
+    border: none;
+    color: $red;
+    font-family: $fontTitle;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    transition-duration: 250ms;
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+        transition-duration: 250ms;
+    }
+}

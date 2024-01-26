@@ -1,7 +1,8 @@
 <div>
     <app-header></app-header>
+    <app-error-message [errorMessage]="errorMessage" ></app-error-message>
     <div class="dashboard-header">
-        <app-error-message [errorMessage]="errorMessage" ></app-error-message>
+
         <a mat-flat-button color=primary routerLink="/article">Créer un article</a>
 
         <button mat-icon-button (click)="changeSort()">

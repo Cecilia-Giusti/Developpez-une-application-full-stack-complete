@@ -1,5 +1,6 @@
 <div>
     <app-header></app-header>
+    <section>
     <h1>Profil utilisateur</h1>
     <app-error-message [errorMessage]="errorMessage" ></app-error-message>
     <form action="">
@@ -24,11 +25,12 @@
                     L'adresse e-mail n'est pas valide.
                 </mat-error>
             </mat-form-field>
-            <button type="submit" [disabled]="profileForm.invalid">Sauvegarder</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="profileForm.invalid">Sauvegarder</button>
         </form>
     </form>
 
    <app-logout></app-logout>
 
    <app-subscription></app-subscription>
+</section>
 </div>

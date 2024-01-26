@@ -7,22 +7,31 @@ section {
         color: $black;
         text-align: center;
         font-family: $fontTitle;
-        font-size: 24px;
+        font-size: 2.4rem;
         font-style: normal;
         font-weight: 700;
         line-height: normal;
+
+        @include screen-max($mobileBreakpoint) {
+            font-size: 2rem;
+        }
     }
 
     form {
         @include flex($direction: column);
-        width: 20%;
+        width: 40rem;
         margin-top: 3rem;
 
-        .mat-form-field {
+        @include screen-max($mobileBreakpoint) {
             width: 100%;
         }
 
+        .mat-form-field {
+            @include form-field-base();
+        }
+
         button {
+            @include button-style-base();
             width: 40%;
         }
 

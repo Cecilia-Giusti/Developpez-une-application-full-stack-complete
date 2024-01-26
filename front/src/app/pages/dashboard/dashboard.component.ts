@@ -53,8 +53,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
               let dateB = new Date(b.createdAt);
 
               return this.isAscending
-                ? dateA.getTime() - dateB.getTime()
-                : dateB.getTime() - dateA.getTime();
+                ? dateB.getTime() - dateA.getTime()
+                : dateA.getTime() - dateB.getTime();
             })
           )
         )
