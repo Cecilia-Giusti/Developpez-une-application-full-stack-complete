@@ -1,25 +1,89 @@
-# P6-Full-Stack-reseau-dev
+# Developpez-une-application-full-stack-complete
 
-## Front
+This application is a social network for developer Beta. You can now sign up, log in, subscribe to themes and write articles for those themes. In addition, you have access to your profile to change your credentials, log out and unsubscribe.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+Developpez-une-application-full-stack-complete is a full-stack application testing project utilizing essential dependencies like Spring Boot, MySQL, JJWT, Lombok, Maven, Angular
 
-Don't forget to install your node_modules before starting (`npm install`).
+## ️ Settings
 
-### Development server
+### Step 1 - Prerequistes :
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Make sure the following softs are installed
 
-### Build
+- Angular CLI version 14.1.0.
+- Java JDK 17
+- Maven
+- MySQL >= 8
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Step 2 - Database
 
-### Where to start
+- Start MySql
+- Create the BDD by importing the SQL script located in ./resources/script.sql
+- Add in your properties :
+  - spring.datasource.username: (username)
+  - spring.datasource.password: (password)
+  - spring.datasource.url : (url of database)
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
+By default they are two accounts:
 
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
+- login: devuser1@example.com
+- password: Passw0rd@
 
-Note: I recommend to use material however it's not mandatory, if you prefer you can get ride of it.
+- login: devuser2@example.com
+- password: Passw0rd@
 
-Good luck!
+### Step 3 - Spring Security
+
+For use JWT and create token, add in your properties :
+jwt.secret= (secret code)
+
+## Run Locally
+
+### Instructions
+
+1.  Fork this repo
+2.  Clone the repo onto your computer
+3.  Open a terminal window in the cloned project
+4.  Run the following commands:
+
+**Back :**
+
+1.Install dependencies :
+
+```bash
+mvn install
+```
+
+3.Start the development mode:
+
+```bash
+java -jar app.jar
+```
+
+**Front:**
+
+1.Install dependencies :
+
+```bash
+npm install
+```
+
+3.Start application:
+
+```bash
+ng serve
+```
+
+## Test Api
+
+Use Postman collection to test several routes.
+
+```bash
+├── ressources
+│   └── postman
+│       ├── rental.postman_collection.json
+```
+
+## Version
+
+V 1.0.0
