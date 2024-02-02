@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ArticleResponse } from '../models/response/article-response';
 import { newArticleRequest } from '../models/request/newarticle-request.model';
 import { MessageResponse } from '../models/response/message-response';

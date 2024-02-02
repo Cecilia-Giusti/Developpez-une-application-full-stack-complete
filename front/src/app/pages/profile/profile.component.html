@@ -3,6 +3,9 @@
     <section>
     <h1>Profil utilisateur</h1>
     <app-error-message [errorMessage]="errorMessage" ></app-error-message>
+    <div *ngIf="validateMessage" class="validate-message">
+        {{ validateMessage }}
+      </div>
     <form action="">
         <form #profileForm="ngForm" (ngSubmit)="submit(profileForm)">
             <mat-form-field>
@@ -25,6 +28,15 @@
                     L'adresse e-mail n'est pas valide.
                 </mat-error>
             </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Mot de passe</mat-label>
+                <input matInput  type="password" placeholder="Mot de passe" name="password" [(ngModel)]="user.password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" #password="ngModel">
+                <mat-error *ngIf=" password.errors?.['pattern']">
+                  Le mot de passe doit comporter au moins 8 caractères, dont un chiffre, une lettre majuscule et une lettre minuscule.
+                </mat-error>
+              </mat-form-field>
+
             <button mat-raised-button color="primary" type="submit" [disabled]="profileForm.invalid">Sauvegarder</button>
         </form>
     </form>

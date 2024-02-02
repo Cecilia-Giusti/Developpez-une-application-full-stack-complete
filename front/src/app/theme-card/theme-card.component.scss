@@ -23,14 +23,6 @@
             @include button-style-base();
             width: auto;
             pointer-events: initial;
-
-            background-color: $purple;
-            transition-duration: 250ms;
-
-            &:hover {
-                background-color: $purple-dark;
-                transition-duration: 250ms;
-            }
         }
     }
 

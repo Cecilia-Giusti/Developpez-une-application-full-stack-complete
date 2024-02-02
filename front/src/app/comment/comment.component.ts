@@ -40,9 +40,7 @@ export class CommentComponent implements OnInit, OnDestroy {
             this.comments = response;
             console.log(response[0].author);
           },
-          error: (error) => {
-            //gestion de l'erreur
-          },
+          error: (error) => {},
         });
     }
   }

@@ -7,7 +7,6 @@
             <p class="comments-content-comment">{{comment.content}}</p>
         </div>
 
-        // ajouter l'ajout d'un commentaire avec un form textarea
         <form #CommentForm="ngForm" (ngSubmit)="submit(CommentForm)">
             <mat-form-field>
                 <mat-label>Ecrivez ici votre commentaire</mat-label>

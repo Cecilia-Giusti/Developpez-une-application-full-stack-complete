@@ -1,15 +1,15 @@
-@import '../../styles/styles';
+@import '../../../styles/styles';
 
 section {
     @include flex($direction: column, $align: flex-start);
     width: 80%;
     margin: auto;
-    gap: 3rem;
+    gap: 1.5rem;
 
     h1 {
         color: $black;
         font-family: $fontTitle;
-        font-size: 24px;
+        font-size: 1.6rem;
         font-style: normal;
         font-weight: 600;
         line-height: normal;
@@ -18,7 +18,7 @@ section {
     p {
         color: $black;
         font-family: $fontTitle;
-        font-size: 20px;
+        font-size: 1.2rem;
         font-style: normal;
         font-weight: 400;
         line-height: normal;
@@ -29,6 +29,14 @@ section {
     .article-info {
         @include flex;
         gap: 3rem;
+
+        @include screen-max($mobileBreakpoint) {
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            row-gap: 1rem;
+            -moz-column-gap: 3rem;
+            column-gap: 3rem;
+        }
     }
 
     .article-content {

@@ -111,4 +111,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<String> handleNoArticlesFoundException(NoArticlesFoundException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    /**
+     * Handles NoArticlesFoundException when no articles are found for a given criteria.
+     *
+     * @param ex The NoArticlesFoundException caught.
+     * @return A ResponseEntity with an error message and HTTP status NOT_FOUND.
+     */
+    @ExceptionHandler(UserException.class)
+    public ResponseEntity<String> handleUserException(UserException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+    }
 }

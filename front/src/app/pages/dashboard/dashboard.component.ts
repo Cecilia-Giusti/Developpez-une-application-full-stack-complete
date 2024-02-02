@@ -38,8 +38,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         },
         error: (error) => {
           this.errorMessage =
-            error ||
-            'Une erreur est survenue lors du chargement de votre Dashboard.';
+            'Une erreur est survenue. Veuillez vous reconnecter';
         },
       });
   }

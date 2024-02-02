@@ -23,7 +23,7 @@ import * as fr from '@angular/common/locales/fr';
 import { registerLocaleData } from '@angular/common';
 import { NewArticleComponent } from './new-article/new-article.component';
 import { MatSelectModule } from '@angular/material/select';
-import { ArticleComponent } from './article/article.component';
+import { ArticleComponent } from './pages/article/article.component';
 import { CommentComponent } from './comment/comment.component';
 import { ThemesComponent } from './pages/themes/themes.component';
 import { ThemeCardComponent } from './theme-card/theme-card.component';

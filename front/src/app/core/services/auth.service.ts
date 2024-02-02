@@ -27,7 +27,11 @@ export class AuthService {
 
     switch (status) {
       case 409:
-        errorMessage = 'Cette adresse mail est déjà utilisée.';
+        if (error.error && error.error.includes('email')) {
+          errorMessage = 'Cette adresse mail est déjà utilisée.';
+        } else {
+          errorMessage = "Ce nom d'utilisateur est déjà utilisé.";
+        }
         break;
       case 400:
         errorMessage = "L'email ou le mot de passe est incorrect";
@@ -36,15 +40,12 @@ export class AuthService {
         errorMessage = 'Une erreur inconnue est survenue';
         break;
     }
-
-    console.error(errorMessage);
     return throwError(errorMessage);
   }
 
   loginUser(loginRequest: LoginRequest): Observable<any> {
     return this.http.post(`${this.baseUrl}/login`, loginRequest).pipe(
       catchError((error) => {
-        console.log(error);
         return this.handleErrorLogin(error);
       })
     );

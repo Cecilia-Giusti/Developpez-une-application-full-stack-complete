@@ -1,0 +1,120 @@
+@import '../../styles/styles';
+
+section {
+    width: 90%;
+    @include flex($direction: column);
+    gap: 2rem;
+
+    @include screen-max($mobileBreakpoint) {
+        width: 100%
+    }
+
+    h2 {
+        color: $black;
+        font-family: $fontTitle;
+        font-size: 1.8rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+        align-self: flex-start;
+    }
+
+    .comments-content {
+        width: 60%;
+        height: 100%;
+        margin: auto;
+        @include flex($justify: space-between);
+        gap: 2rem;
+
+        @include screen-max($mobileBreakpoint) {
+            flex-direction: column-reverse;
+            align-items: flex-start;
+            width: 90%;
+            gap: 0.5rem;
+        }
+
+        &-author {
+            color: $black;
+            font-family: $fontTitle;
+            font-size: 1.3rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            align-self: flex-start;
+            padding-top: 0.5rem;
+
+            @include screen-max($mobileBreakpoint) {
+                align-self: flex-end;
+                font-size: 1rem;
+            }
+        }
+
+        &-comment {
+            color: $black;
+            font-family: $fontTitle;
+            font-size: 1.3rem;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+
+            border-radius: 16px;
+            background: #EEE;
+            width: 100%;
+            height: 100px;
+            padding: 1rem 1rem;
+
+            @include screen-max($mobileBreakpoint) {
+                font-size: 1rem;
+            }
+        }
+    }
+
+    form {
+        width: 80%;
+        @include flex;
+        gap: 3rem;
+        position: relative;
+
+        @include screen-max($mobileBreakpoint) {
+            width: 100%
+        }
+
+        .mat-form-field {
+            @include form-field-base();
+            border-radius: 16px;
+
+            @include screen-max($mobileBreakpoint) {
+                width: 100%;
+                font-size: 0.8rem;
+            }
+
+        }
+
+        button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            scale: 1;
+            transition-duration: 250ms;
+
+            @include screen-max($mobileBreakpoint) {
+                position: absolute;
+                top: 50%;
+                right: 5%;
+                translate: 5% -50%;
+            }
+
+            &:hover {
+                scale: 1.2;
+                transition-duration: 250ms;
+            }
+
+            .mat-icon {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+        }
+
+    }
+}

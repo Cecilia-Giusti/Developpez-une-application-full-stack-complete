@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ArticleResponse } from '../core/models/response/article-response';
-import { ArticleService } from '../core/services/article.service';
+import { ArticleResponse } from '../../core/models/response/article-response';
+import { ArticleService } from '../../core/services/article.service';
 import { Subject, takeUntil } from 'rxjs';
 
 @Component({

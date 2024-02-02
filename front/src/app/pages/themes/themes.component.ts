@@ -40,10 +40,7 @@ export class ThemesComponent implements OnInit, OnDestroy {
           this.subscriptions = subscriptionResponse;
           this.updateSubscription();
         },
-        error: (error) => {
-          this.errorMessage =
-            error || 'Une erreur est survenue lors du chargement des thèmes.';
-        },
+        error: (error) => {},
       });
   }
 
@@ -51,7 +48,6 @@ export class ThemesComponent implements OnInit, OnDestroy {
     if (this.themes && this.subscriptions) {
       this.themes.forEach((theme) => {
         theme.isSubscribed = this.subscriptions.some((subscriptionId) => {
-          console.log(subscriptionId);
           return subscriptionId === theme.id;
         });
       });

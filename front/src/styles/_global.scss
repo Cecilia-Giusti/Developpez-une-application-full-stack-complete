@@ -10,6 +10,19 @@ body {
     margin-bottom: 5rem;
 }
 
-.error-message {
+.error-message,
+.validate-message {
     color: $red;
+    width: 90%;
+    text-align: center;
+    margin: auto;
+    margin-bottom: 1rem;
+}
+
+.validate-message {
+    color: $green;
+}
+
+app-comment {
+    width: 100%;
 }

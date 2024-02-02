@@ -30,6 +30,15 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     boolean existsByEmail(String email);
 
     /**
+     * Checks if a user with the given username exists.
+     * This method determines whether a User entity exists with the specified username.
+     *
+     * @param username The username to check for existence.
+     * @return True if a User entity with the given username exists, false otherwise.
+     */
+    boolean existsByUsername(String username);
+
+    /**
      * Retrieves a user by their ID.
      * This method finds and returns the User entity where the ID matches the provided ID.
      *
@@ -49,4 +58,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     String findUsernameById(Integer id);
 
 
+    Optional<User> findByUsername(String username);
 }

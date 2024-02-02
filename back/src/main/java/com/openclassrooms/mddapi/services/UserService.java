@@ -1,9 +1,9 @@
 package com.openclassrooms.mddapi.services;
 
+import com.openclassrooms.mddapi.dto.request.UserUpdate;
 import com.openclassrooms.mddapi.exceptions.AccountException;
 import com.openclassrooms.mddapi.exceptions.UserException;
 import com.openclassrooms.mddapi.models.User;
-import com.openclassrooms.mddapi.dto.request.UserRequest;
 import com.openclassrooms.mddapi.dto.response.UserResponse;
 import com.openclassrooms.mddapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,22 +55,29 @@ public class UserService {
      * Updates the user's profile information based on the provided request data.
      * This method allows for updating the username and/or email of the user.
      *
-     * @param userRequest The request containing the new user details.
+     * @param userUpdate The request containing the new user details.
      * @return The updated User object.
      * @throws UserException If the email is already in use by another account.
      */
-    public User updateUser(UserRequest userRequest) throws UserException {
+    public User updateUser(UserUpdate userUpdate) throws UserException {
         User oldUser = getUserInfo();
 
-        if (userRequest.getUsername() != null && !userRequest.getUsername().equals(oldUser.getUsername())) {
-            oldUser.setUsername(userRequest.getUsername());
+        if (userUpdate.getUsername() != null && !userUpdate.getUsername().equals(oldUser.getUsername())) {
+            if (userRepository.existsByUsername(userUpdate.getUsername())) {
+                throw new UserException("Username already in use");
+            }
+            oldUser.setUsername(userUpdate.getUsername());
         }
 
-        if (userRequest.getEmail() != null && !userRequest.getEmail().equals(oldUser.getEmail())) {
-            if (userRepository.existsByEmail(userRequest.getEmail())) {
+        if (userUpdate.getEmail() != null && !userUpdate.getEmail().equals(oldUser.getEmail())) {
+            if (userRepository.existsByEmail(userUpdate.getEmail())) {
                 throw new UserException("Email already in use");
             }
-            oldUser.setEmail(userRequest.getEmail());
+            oldUser.setEmail(userUpdate.getEmail());
+        }
+
+        if (userUpdate.getPassword() != null ) {
+            oldUser.setPassword(passwordEncoder.encode(userUpdate.getPassword()));
         }
 
         userRepository.save(oldUser);
@@ -90,6 +97,7 @@ public class UserService {
         userResponse.setId(String.valueOf(user.getId()));
         userResponse.setUsername(user.getUsername());
         userResponse.setEmail(user.getEmail());
+        userResponse.setPassword(user.getPassword());
 
         if (user.getCreatedAt() != null) {
             userResponse.setCreated_at(user.getCreatedAt().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());

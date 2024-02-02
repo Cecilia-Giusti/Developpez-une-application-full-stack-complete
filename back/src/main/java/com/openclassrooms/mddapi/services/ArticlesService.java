@@ -1,7 +1,9 @@
 package com.openclassrooms.mddapi.services;
 
+import com.openclassrooms.mddapi.exceptions.AccountException;
 import com.openclassrooms.mddapi.exceptions.NoArticlesFoundException;
 import com.openclassrooms.mddapi.exceptions.NoSubscribedThemesException;
+import com.openclassrooms.mddapi.exceptions.UserException;
 import com.openclassrooms.mddapi.models.Article;
 import com.openclassrooms.mddapi.models.Theme;
 import com.openclassrooms.mddapi.models.User;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -60,8 +63,12 @@ public class ArticlesService {
      * @throws NoArticlesFoundException    if no articles are found for the subscribed themes.
      */
     public List<ArticleResponse> getArticlesForCurrentUser(String userEmail) {
-        User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
+
+        Optional<User> userOptional = userRepository.findByEmail(userEmail);
+        if(userOptional.isEmpty()) {
+            throw new AccountException("User email is not founded");
+        }
+        User user = userOptional.get();
 
         List<Integer> themeIds = subscriptionRepository.findThemeIdsByUserId(user.getId());
 
@@ -93,10 +100,10 @@ public class ArticlesService {
      */
     public void createArticle(ArticleRequest articleRequest, String userEmail) {
         User user = userRepository.findByEmail(userEmail)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + userEmail));
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email"));
 
         Theme theme = themeRepository.findById(articleRequest.getThemeId())
-                .orElseThrow(() -> new EntityNotFoundException("Theme not found with ID: " + articleRequest.getThemeId()));
+                .orElseThrow(() -> new EntityNotFoundException("Theme not found with ID"));
 
         Article article = new Article();
         article.setUserId(user.getId());
@@ -117,7 +124,7 @@ public class ArticlesService {
      */
     public ArticleResponse getArticleById(Integer articleId) {
         Article article = articleRepository.findById(articleId)
-                .orElseThrow(() -> new EntityNotFoundException("Article not found with ID: " + articleId));
+                .orElseThrow(() -> new EntityNotFoundException("Article not found with ID"));
         String author = userRepository.findUsernameById(article.getUserId());
         String theme = themeRepository.findNameById(article.getThemeId());
         return new ArticleResponse(article, author, theme);
