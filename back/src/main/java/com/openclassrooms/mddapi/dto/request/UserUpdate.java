@@ -5,6 +5,9 @@ import lombok.Data;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+/**
+ * Data Transfer Object (DTO) for user is updating.
+ */
 @Data
 public class UserUpdate {
     /**

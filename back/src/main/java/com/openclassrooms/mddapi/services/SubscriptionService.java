@@ -35,10 +35,11 @@ public class SubscriptionService {
     /**
      * Retrieves theme IDs for the current user.
      * This method fetches the list of theme IDs that the given user is subscribed to.
-     * If the user is not subscribed to any themes, it throws a NoSubscribedThemesException.
      *
      * @param userEmail The email of the user whose theme IDs are to be retrieved.
      * @return A list of Integer representing theme IDs.
+     * @throws UsernameNotFoundException if the user is not found.
+     * @throws NoSubscribedThemesException if the user is not subscribed to any themes.
      */
     public List<Integer> getThemeIdsForCurrentUser(String userEmail) {
         User user = userRepository.findByEmail(userEmail)
@@ -57,6 +58,8 @@ public class SubscriptionService {
      *
      * @param userEmail The email of the user who is subscribing.
      * @param themeId The ID of the theme to which the user is subscribing.
+     * @throws UsernameNotFoundException if the user is not found.
+     * @throws EntityNotFoundException if the theme is not found with an id.
      */
     public void createSubscription(String userEmail, Integer themeId) {
         User user = userRepository.findByEmail(userEmail)
@@ -79,6 +82,8 @@ public class SubscriptionService {
      *
      * @param userEmail The email of the user whose subscription is to be deleted.
      * @param themeId The ID of the theme from which the user is unsubscribing.
+     * @throws UsernameNotFoundException if the user is not found.
+     * @throws EntityNotFoundException if the subscription is not found.
      */
     public void deleteSubscription(String userEmail, Integer themeId) {
         User user = userRepository.findByEmail(userEmail)
@@ -90,6 +95,14 @@ public class SubscriptionService {
         subscriptionRepository.delete(subscription);
     }
 
+    /**
+     * Retrieves theme for the current user.
+     * This method fetches the list of theme that the given user is subscribed to.
+     *
+     * @param userEmail The email of the user.
+     * @return A list of Theme objects.
+     * @throws NoSubscribedThemesException if the user is not subscribed to any themes.
+     */
     public List<Theme> getThemesForCurrentUser(String userEmail) {
         List<Integer> themes = this.getThemeIdsForCurrentUser(userEmail);
 

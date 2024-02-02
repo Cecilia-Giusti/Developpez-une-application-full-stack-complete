@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
- * Controller for managing theme-related actions.
+ * Controller for managing theme actions.
  */
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController

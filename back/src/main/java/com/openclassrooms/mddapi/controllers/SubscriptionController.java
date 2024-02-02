@@ -72,10 +72,10 @@ public class SubscriptionController {
     }
 
     /**
-     * Retrieves a list of theme IDs to which the current user is subscribed.
+     * Retrieves a list of themes to which the current user is subscribed.
      *
      * @param authentication The security context of the authenticated user.
-     * @return A ResponseEntity containing a list of subscribed theme IDs.
+     * @return A ResponseEntity containing a list of subscribed themes.
      */
     @GetMapping("/all")
     public ResponseEntity<List<Theme>> getAllSubscriptionsForCurrentUser(Authentication authentication) {

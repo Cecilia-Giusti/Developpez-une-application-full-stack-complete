@@ -3,7 +3,6 @@ package com.openclassrooms.mddapi.services;
 import com.openclassrooms.mddapi.exceptions.AccountException;
 import com.openclassrooms.mddapi.exceptions.NoArticlesFoundException;
 import com.openclassrooms.mddapi.exceptions.NoSubscribedThemesException;
-import com.openclassrooms.mddapi.exceptions.UserException;
 import com.openclassrooms.mddapi.models.Article;
 import com.openclassrooms.mddapi.models.Theme;
 import com.openclassrooms.mddapi.models.User;
@@ -58,7 +57,7 @@ public class ArticlesService {
      *
      * @param userEmail Email of the current user.
      * @return List of ArticleResponse objects for the subscribed themes.
-     * @throws UsernameNotFoundException   if the user is not found by email.
+     * @throws AccountException   if the user is not found by email.
      * @throws NoSubscribedThemesException if the user has no subscribed themes.
      * @throws NoArticlesFoundException    if no articles are found for the subscribed themes.
      */

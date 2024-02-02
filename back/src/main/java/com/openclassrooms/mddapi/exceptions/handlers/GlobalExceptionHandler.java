@@ -14,8 +14,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 /**
  * Global exception handler for the application.
- * This class provides centralized exception handling across all controllers,
- * standardizing the response structure for various types of exceptions.
  */
 @ControllerAdvice
 @Slf4j
@@ -23,7 +21,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
      * Handles exceptions related to validation of request body parameters.
-     * This method is invoked when @Valid annotation fails to validate the request body parameters.
      *
      * @param ex      The MethodArgumentNotValidException exception thrown when validation fails.
      * @param headers The HttpHeaders associated with the request.
@@ -113,10 +110,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * Handles NoArticlesFoundException when no articles are found for a given criteria.
+     * Handles UserException when no user are found for a given criteria.
      *
      * @param ex The NoArticlesFoundException caught.
-     * @return A ResponseEntity with an error message and HTTP status NOT_FOUND.
+     * @return A ResponseEntity with an error message and HTTP status CONFLICT.
      */
     @ExceptionHandler(UserException.class)
     public ResponseEntity<String> handleUserException(UserException ex) {

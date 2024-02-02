@@ -52,7 +52,7 @@ public class AuthService {
      *
      * @param registerRequest The user's registration details.
      * @return A JWT token generated for the registered user.
-     * @throws RegisterException if registration fails, typically due to existing email.
+     * @throws RegisterException if registration fails.
      */
     public String registerUser(RegisterRequest registerRequest) {
         Optional<User> existingEmail = userRepository.findByEmail(registerRequest.getEmail());

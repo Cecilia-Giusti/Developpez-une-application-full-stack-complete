@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.controllers;
 
 import com.openclassrooms.mddapi.dto.response.CommentResponse;
-import com.openclassrooms.mddapi.models.Comment;
 import com.openclassrooms.mddapi.dto.request.CommentRequest;
 import com.openclassrooms.mddapi.dto.response.MessageResponse;
 import com.openclassrooms.mddapi.services.CommentService;
@@ -48,7 +47,7 @@ public class CommentsController {
      * @param articleId The ID of the article to which the comment will be added.
      * @param commentRequest The request payload containing the comment details.
      * @param authentication The authentication context containing the user's details.
-     * @return A ResponseEntity indicating the result of the operation.
+     * @return A ResponseEntity containing a message.
      */
     @PostMapping("/{articleId}/comments")
     public ResponseEntity<MessageResponse> addCommentToArticle(@PathVariable Integer articleId,

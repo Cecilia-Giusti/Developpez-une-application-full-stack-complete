@@ -44,7 +44,7 @@ public class UserController {
      * Updates the profile information of the currently authenticated user.
      *
      * @param userUpdate The user's updated profile data.
-     * @return A ResponseEntity containing a ProfilUpdateResponse when successfully.
+     * @return A ResponseEntity containing a profile when successfully.
      */
     @PutMapping("/profile")
     public ResponseEntity<?> updateUser(@RequestBody @Valid UserUpdate userUpdate) {
