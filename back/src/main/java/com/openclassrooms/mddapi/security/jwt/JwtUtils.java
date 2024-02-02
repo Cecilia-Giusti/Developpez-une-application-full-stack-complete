@@ -37,16 +37,6 @@ public class JwtUtils {
     }
 
     /**
-     * Extract the expiration date from the provided JWT token.
-     *
-     * @param token JWT token.
-     * @return Expiration date of the token.
-     */
-    public Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
-    }
-
-    /**
      * Extract specific claims from the provided JWT token using a claims resolver function.
      *
      * @param token JWT token.
@@ -89,16 +79,6 @@ public class JwtUtils {
     }
 
     /**
-     * Check if the provided JWT token has expired.
-     *
-     * @param token JWT token.
-     * @return Boolean indicating if the token is expired.
-     */
-    public Boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
-    }
-
-    /**
      * Extract the JWT token from the Authorization header.
      *
      * @param headerValue Authorization header value.
@@ -135,7 +115,6 @@ public class JwtUtils {
                 .setClaims(claims)
                 .setSubject(email)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30))
                 .signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
     }
 

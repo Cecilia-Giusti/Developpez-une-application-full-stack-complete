@@ -1,0 +1,44 @@
+@import '../../styles/styles';
+
+section {
+    @include flex($direction: column);
+
+    h1 {
+        color: $black;
+        text-align: center;
+        font-family: $fontTitle;
+        font-size: 2.4rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+
+        @include screen-max($mobileBreakpoint) {
+            font-size: 2rem;
+        }
+    }
+
+    form {
+        @include flex($direction: column);
+        width: 40rem;
+        margin-top: 3rem;
+
+        @include screen-max($mobileBreakpoint) {
+            width: 100%;
+        }
+
+        .mat-form-field {
+            @include form-field-base();
+        }
+
+        button {
+            @include button-style-base();
+            width: 40%;
+        }
+
+        textarea {
+            min-height: 150px;
+            margin-bottom: 2rem;
+            resize: none;
+        }
+    }
+}

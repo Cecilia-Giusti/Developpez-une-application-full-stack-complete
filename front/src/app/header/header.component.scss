@@ -1,0 +1,41 @@
+@import '../../styles/styles';
+
+
+header {
+    @include flex($justify: flex-start, $direction: column, $align: flex-start);
+    width: 100%;
+
+
+
+    @include screen-max($mobileBreakpoint) {
+        flex-direction: column-reverse;
+    }
+
+    .header-container {
+        width: 100%;
+        border-bottom: 1px solid $black;
+
+        @include screen-max($mobileBreakpoint) {
+            border-bottom: none;
+            height: 100%;
+        }
+
+        &-content {
+            @include flex($justify: space-between);
+            width: 100%;
+            max-width: $maxScreen;
+            margin: auto;
+            height: 100%;
+        }
+    }
+
+    &.page-connected {
+        flex-direction: column;
+
+        .header-container {
+            @include screen-max($mobileBreakpoint) {
+                border-bottom: 1px solid $black;
+            }
+        }
+    }
+}

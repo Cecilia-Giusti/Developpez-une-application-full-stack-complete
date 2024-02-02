@@ -1,0 +1,50 @@
+//--------- MIXINS -----------
+
+
+@mixin flex($align: center, $justify: center, $direction: row) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin screen-max($breakpoint) {
+    @media (max-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin screen-min($breakpoint) {
+    @media (min-width: $breakpoint) {
+        @content;
+    }
+}
+
+@mixin margin-horizontal($marginLeft : $marginContainer, $marginRight: $marginLeft) {
+    margin-left: $marginLeft ;
+    margin-right: $marginRight;
+}
+
+@mixin button-style-base() {
+    width: 100%;
+    font-size: 1.4rem;
+    padding: 0.6rem 2.3rem;
+    @include flex;
+    border-radius: 10px;
+
+    @include screen-max($mobileBreakpoint) {
+        font-size: 1.2rem;
+        width: 12rem;
+        padding: 0.3rem 2rem;
+    }
+}
+
+@mixin form-field-base() {
+    width: 100%;
+    font-size: 1.2rem;
+
+    @include screen-max($mobileBreakpoint) {
+        width: 85%;
+        font-size: 1rem;
+    }
+}

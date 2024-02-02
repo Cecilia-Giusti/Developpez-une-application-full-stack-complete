@@ -1,0 +1,9 @@
+<header [ngClass]="isAuthPage() ? 'page-auth' : 'page-connected'">
+  <div class="header-container">
+    <div class="header-container-content">
+      <app-logo [page]="isAuthPage() ? 'page-auth' : 'page-connected'"></app-logo>
+      <app-nav *ngIf="shouldShowNav()"></app-nav>
+    </div>
+  </div>
+  <app-previous *ngIf="shouldShowPrevious()"></app-previous>
+</header>

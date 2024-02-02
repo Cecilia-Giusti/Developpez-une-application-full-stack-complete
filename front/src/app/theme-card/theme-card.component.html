@@ -1,0 +1,20 @@
+<mat-card *ngIf="theme && (!isSubscriptionView || (isSubscriptionView && !theme.isSubscribed))" class="theme-card">
+  <app-error-message [errorMessage]="errorMessage"></app-error-message>
+  <div class="theme-card-content">
+  <mat-card-header>
+    <mat-card-title class="theme-title">{{ theme.name }}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content class="theme-content">
+    <p>{{theme.description }}</p>
+  </mat-card-content>
+  </div>
+  
+  <button *ngIf="!isSubscriptionView" mat-raised-button [color]="theme.isSubscribed ? 'accent' : 'primary'"
+    [disabled]="theme.isSubscribed" (click)="theme.isSubscribed ? null : subscribe()">
+    {{ theme.isSubscribed ? 'Abonné' : 'S\'abonner' }}
+  </button>
+
+  <button *ngIf="isSubscriptionView" color="primary" mat-raised-button (click)="unsubscribe()">
+    Se désabonner
+  </button>
+</mat-card>

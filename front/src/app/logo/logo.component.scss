@@ -1,0 +1,24 @@
+@import '../../styles/styles';
+
+img {
+    width: 20%;
+    @include margin-horizontal($marginContainerHeader);
+
+    @include screen-max($mobileBreakpoint) {
+        width: 35%;
+    }
+}
+
+.page-auth {
+    @include screen-max($mobileBreakpoint) {
+        width: 100%;
+        align-self: center;
+        @include flex;
+    }
+
+    img {
+        @include screen-max($mobileBreakpoint) {
+            width: 90%;
+        }
+    }
+}

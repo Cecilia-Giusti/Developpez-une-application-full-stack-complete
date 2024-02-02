@@ -11,14 +11,10 @@ import lombok.Setter;
 @Setter
 public class JwtResponse {
 
-    private String token;
-
     /**
-     * Default constructor.
-     * Creates an empty JwtResponse object.
+     * The token content
      */
-    public JwtResponse() {
-    }
+    private String token;
 
     /**
      * Constructor to create a JwtResponse instance with a specific JWT token.

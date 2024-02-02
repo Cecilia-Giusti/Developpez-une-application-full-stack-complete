@@ -1,6 +1,6 @@
 package com.openclassrooms.mddapi.controllers;
 
-import com.openclassrooms.mddapi.models.Comment;
+import com.openclassrooms.mddapi.dto.response.CommentResponse;
 import com.openclassrooms.mddapi.dto.request.CommentRequest;
 import com.openclassrooms.mddapi.dto.response.MessageResponse;
 import com.openclassrooms.mddapi.services.CommentService;
@@ -18,6 +18,7 @@ import java.util.List;
 /**
  * Controller for handling comment-related operations on articles.
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @Slf4j
 @RequestMapping("articles")
@@ -34,9 +35,9 @@ public class CommentsController {
      * @return A ResponseEntity containing a list of comments.
      */
     @GetMapping("/{articleId}/comments")
-    public ResponseEntity<List<Comment>> getCommentsByArticleId(@PathVariable Integer articleId, Authentication authentication) {
+    public ResponseEntity<List<CommentResponse>> getCommentsByArticleId(@PathVariable Integer articleId, Authentication authentication) {
         String userEmail = authentication.getName();
-        List<Comment> comments = commentService.getCommentsByArticleId(articleId, userEmail);
+        List<CommentResponse> comments = commentService.getCommentsByArticleId(articleId, userEmail);
         return ResponseEntity.ok(comments);
     }
 
@@ -46,7 +47,7 @@ public class CommentsController {
      * @param articleId The ID of the article to which the comment will be added.
      * @param commentRequest The request payload containing the comment details.
      * @param authentication The authentication context containing the user's details.
-     * @return A ResponseEntity indicating the result of the operation.
+     * @return A ResponseEntity containing a message.
      */
     @PostMapping("/{articleId}/comments")
     public ResponseEntity<MessageResponse> addCommentToArticle(@PathVariable Integer articleId,

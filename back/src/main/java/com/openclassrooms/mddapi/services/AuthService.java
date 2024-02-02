@@ -52,13 +52,19 @@ public class AuthService {
      *
      * @param registerRequest The user's registration details.
      * @return A JWT token generated for the registered user.
-     * @throws RegisterException if registration fails, typically due to existing email.
+     * @throws RegisterException if registration fails.
      */
     public String registerUser(RegisterRequest registerRequest) {
-        Optional<User> existingUser = userRepository.findByEmail(registerRequest.getEmail());
-        if (existingUser.isPresent()) {
+        Optional<User> existingEmail = userRepository.findByEmail(registerRequest.getEmail());
+        if (existingEmail.isPresent()) {
             throw new RegisterException("The email address is already in use. Please try different credentials");
         }
+
+        Optional<User> existingUsername = userRepository.findByUsername(registerRequest.getUsername());
+        if (existingUsername.isPresent()) {
+            throw new RegisterException("The username is already in use. Please try different credentials");
+        }
+
         User newUser = new User();
         newUser.setUsername(registerRequest.getUsername());
         newUser.setEmail(registerRequest.getEmail());

@@ -1,8 +1,8 @@
 package com.openclassrooms.mddapi.controllers;
 
+import com.openclassrooms.mddapi.dto.request.UserUpdate;
+import com.openclassrooms.mddapi.dto.response.ProfileUpdateResponse;
 import com.openclassrooms.mddapi.models.User;
-import com.openclassrooms.mddapi.dto.request.UserRequest;
-import com.openclassrooms.mddapi.dto.response.MessageResponse;
 import com.openclassrooms.mddapi.dto.response.UserResponse;
 import com.openclassrooms.mddapi.services.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -16,6 +16,7 @@ import javax.validation.Valid;
 /**
  * Controller for managing user profiles and details.
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @Slf4j
 @RequestMapping(value = "user")
@@ -23,6 +24,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private com.openclassrooms.mddapi.security.jwt.JwtUtils jwtUtils;
 
     /**
      * Retrieves the profile information of the currently authenticated user.
@@ -39,16 +43,21 @@ public class UserController {
     /**
      * Updates the profile information of the currently authenticated user.
      *
-     * @param userRequest The user's updated profile data.
-     * @return A ResponseEntity containing a MessageResponse indicating a successful update.
+     * @param userUpdate The user's updated profile data.
+     * @return A ResponseEntity containing a profile when successfully.
      */
     @PutMapping("/profile")
-    public ResponseEntity<MessageResponse> updateUser(@RequestBody @Valid UserRequest userRequest) {
-        User user = userService.updateUser(userRequest);
+    public ResponseEntity<?> updateUser(@RequestBody @Valid UserUpdate userUpdate) {
 
-        MessageResponse response = new MessageResponse("Profile updated !");
-        return ResponseEntity.ok(response);
+        User user = userService.updateUser(userUpdate);
+
+            String token = jwtUtils.generateToken(user.getEmail());
+            ProfileUpdateResponse profileUpdateResponse = new ProfileUpdateResponse(token, "Profile updated");
+
+            return ResponseEntity.ok(profileUpdateResponse);
+
     }
+
 }
 
 

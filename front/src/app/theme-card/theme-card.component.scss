@@ -1,0 +1,54 @@
+@import '../../styles/styles';
+
+.theme {
+    &-card {
+        background: $grey-light;
+        border-radius: 8px;
+        cursor: pointer;
+        width: auto;
+        margin: auto;
+        height: 15rem;
+        @include flex($direction: column, $align: flex-start, $justify: space-between);
+        pointer-events: none;
+
+
+        @include screen-max($mobileBreakpoint) {
+            width: initial;
+            margin: initial;
+            height: auto;
+        }
+
+        button {
+            align-self: center;
+            @include button-style-base();
+            width: auto;
+            pointer-events: initial;
+        }
+    }
+
+    &-title {
+        color: $black;
+        font-family: $fontTitle;
+        font-size: 1.4rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+
+        @include screen-max($mobileBreakpoint) {
+            font-size: 1.2rem;
+        }
+    }
+
+    &-content {
+        color: $black;
+        font-family: $fontTitle;
+        font-size: 1.2rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+        @include screen-max($mobileBreakpoint) {
+            font-size: 1rem;
+        }
+    }
+}

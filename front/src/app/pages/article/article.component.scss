@@ -1,0 +1,58 @@
+@import '../../../styles/styles';
+
+section {
+    @include flex($direction: column, $align: flex-start);
+    width: 80%;
+    margin: auto;
+    gap: 1.5rem;
+
+    h1 {
+        color: $black;
+        font-family: $fontTitle;
+        font-size: 1.6rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+    p {
+        color: $black;
+        font-family: $fontTitle;
+        font-size: 1.2rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+
+
+    }
+
+    .article-info {
+        @include flex;
+        gap: 3rem;
+
+        @include screen-max($mobileBreakpoint) {
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            row-gap: 1rem;
+            -moz-column-gap: 3rem;
+            column-gap: 3rem;
+        }
+    }
+
+    .article-content {
+        position: relative;
+        width: 100%;
+        padding-bottom: 2rem;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            height: 1px;
+            background-color: $black;
+            width: 97%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+}

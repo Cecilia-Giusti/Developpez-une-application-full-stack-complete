@@ -16,6 +16,7 @@ import javax.validation.Valid;
 /**
  * Controller for handling authentication operations such as user registration and login.
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @Slf4j
 @RequestMapping(value = "auth")

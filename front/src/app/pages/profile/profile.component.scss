@@ -1,0 +1,48 @@
+@import '../../../styles/styles';
+
+section {
+    @include flex($direction: column);
+    width: 90%;
+    margin: $marginContainer auto 0;
+
+    max-width: $maxScreen;
+
+    h1 {
+        color: $black;
+
+        font-family: $fontTitle;
+        font-size: 1.5rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin-bottom: 2rem;
+
+        @include screen-max($mobileBreakpoint) {
+            font-size: 1.3rem;
+        }
+    }
+
+    form {
+        @include flex($direction: column);
+        width: 20rem;
+        margin-bottom: 10px;
+
+        .mat-form-field {
+            @include form-field-base();
+        }
+
+        button {
+            @include button-style-base();
+            width: 70%;
+            background-color: $purple;
+            transition-duration: 250ms;
+
+            &:hover {
+                background-color: $purple-dark;
+                transition-duration: 250ms;
+            }
+        }
+    }
+
+
+}

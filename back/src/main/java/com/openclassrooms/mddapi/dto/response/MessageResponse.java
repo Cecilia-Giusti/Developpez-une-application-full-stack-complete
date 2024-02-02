@@ -5,14 +5,13 @@ import lombok.Setter;
 
 /**
  * Data Transfer Object (DTO) representing a generic message response.
- * This class is used to encapsulate a simple text message, typically used for sending responses to various API requests.
  */
 @Getter
 @Setter
 public class MessageResponse {
 
     /**
-     * The message content, conveying information about the result of an operation or any other relevant information.
+     * The message content
      */
     private String message;
 
