@@ -4,6 +4,12 @@ import { Subject, takeUntil } from 'rxjs';
 import { UserResponse } from 'src/app/core/models/response/user-response';
 import { UserService } from 'src/app/core/services/user.service';
 
+/**
+ * @component
+ * @description
+ * ProfileComponent provides an interface for users to view and update their profile information.
+ * @selector app-profile
+ */
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -25,8 +31,15 @@ export class ProfileComponent implements OnInit, OnDestroy {
   newPassword: string = '';
   oldPassword: string = '';
 
+  /**
+   * @constructor
+   * @param {UserService} userService - The service to interact with the user data.
+   */
   constructor(private userService: UserService) {}
 
+  /**
+   * Fetches the current user's profile data on component initialization.
+   */
   ngOnInit(): void {
     this.destroy$ = new Subject<boolean>();
 
@@ -47,6 +60,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
         },
       });
   }
+
+  /**
+   * Handles the profile update form submission. Updates user data if the form is valid.
+   * @param {NgForm} form - The form containing updated user profile data.
+   */
   submit(form: NgForm) {
     this.destroy$ = new Subject<boolean>();
     if (form.valid) {

@@ -5,14 +5,26 @@ import { MessageResponse } from '../models/response/message-response';
 import { Theme } from '../models/theme.model';
 import { AuthService } from './auth.service';
 
+/**
+ * Service for managing user subscriptions to themes.
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class SubscriptionService {
   private baseUrl = 'http://localhost:8080/subscriptions';
 
+  /**
+   * Creates an instance of SubscriptionService.
+   * @param http - The HttpClient for making HTTP requests.
+   * @param authService - The AuthService for authentication-related operations.
+   */
   constructor(private http: HttpClient, private authService: AuthService) {}
 
+  /**
+   * Retrieves the subscriptions of the current user.
+   * @returns An Observable representing the array of theme IDs that the user is subscribed to.
+   */
   getSubscriptionForCurrentUser(): Observable<number[]> {
     const token = localStorage.getItem('token');
 
@@ -25,6 +37,11 @@ export class SubscriptionService {
     return this.http.get<number[]>(this.baseUrl, { headers });
   }
 
+  /**
+   * Adds a subscription to a theme for the current user.
+   * @param themeId - The ID of the theme to subscribe to.
+   * @returns An Observable representing the response message.
+   */
   addSubscription(themeId: number): Observable<MessageResponse> {
     const token = localStorage.getItem('token');
 
@@ -38,6 +55,10 @@ export class SubscriptionService {
     });
   }
 
+  /**
+   * Retrieves all themes that the user is subscribed to.
+   * @returns An Observable representing the array of subscribed themes.
+   */
   getSubscribedThemes(): Observable<Theme[]> {
     const token = localStorage.getItem('token');
 
@@ -50,6 +71,11 @@ export class SubscriptionService {
     return this.http.get<Theme[]>(`${this.baseUrl}/all`, { headers });
   }
 
+  /**
+   * Deletes a subscription to a theme for the current user.
+   * @param themeId - The ID of the theme to unsubscribe from.
+   * @returns An Observable representing the result of the deletion.
+   */
   deleteSubscription(themeId: number) {
     const token = localStorage.getItem('token');
 

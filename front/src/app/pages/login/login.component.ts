@@ -5,6 +5,12 @@ import { Subject, takeUntil } from 'rxjs';
 import { LoginRequest } from 'src/app/core/models/request/login-request.model';
 import { AuthService } from 'src/app/core/services/auth.service';
 
+/**
+ * @component
+ * @description
+ * LoginComponent provides a user interface for logging in to the application.
+ * @selector app-login
+ */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,8 +26,17 @@ export class LoginComponent implements OnDestroy {
 
   errorMessage: string = '';
 
+  /**
+   * @constructor
+   * @param {AuthService} authService - The service to interact with the article data.
+   * @param {Router} router - The Angular service for interacting with the router.
+   */
   constructor(private authService: AuthService, private router: Router) {}
 
+  /**
+   * Handles the form submission, attempts to log the user in, and navigates to the dashboard upon success.
+   * @param {NgForm} form - The form containing user login credentials.
+   */
   submit(form: NgForm) {
     this.destroy$ = new Subject<boolean>();
     if (form.valid) {

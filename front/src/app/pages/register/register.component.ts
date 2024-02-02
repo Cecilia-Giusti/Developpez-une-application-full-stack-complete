@@ -5,6 +5,12 @@ import { RegisterRequest } from 'src/app/core/models/request/register-request.mo
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 
+/**
+ * @component
+ * @description
+ * RegisterComponent provides a user interface for account registration.
+ * @selector app-register
+ */
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -20,8 +26,17 @@ export class RegisterComponent implements OnDestroy {
 
   errorMessage: string = '';
 
+  /**
+   * @constructor
+   * @param {AuthService} authService - The service to interact with the auth data.
+   * @param {Router} router - The Angular service for interacting with the router.
+   */
   constructor(private authService: AuthService, private router: Router) {}
 
+  /**
+   * Handles the registration form submission. If the form is valid, it attempts to register the user.
+   * @param {NgForm} form - The form containing user registration data.
+   */
   submit(form: NgForm) {
     this.destroy$ = new Subject<boolean>();
     if (form.valid) {

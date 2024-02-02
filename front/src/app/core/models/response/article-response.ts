@@ -1,3 +1,6 @@
+/**
+ * Represents the structure of an article response received from the backend.
+ */
 export interface ArticleResponse {
   id: number;
   userId: number;

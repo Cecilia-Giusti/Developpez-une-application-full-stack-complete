@@ -1,12 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 /**
  * @component HomeComponent
- * @selector app-home
- *
  * @description
- * The HomeComponent provides the main view for the user when they navigate to the root of the application.
- * It serves as the landing page of the application and is associated with the 'app-home' selector.
+ * The HomeComponent provides the main view for the user
+ * @selector app-home
  */
 @Component({
   selector: 'app-home',

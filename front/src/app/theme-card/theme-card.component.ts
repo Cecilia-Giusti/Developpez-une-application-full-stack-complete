@@ -9,6 +9,13 @@ import { Theme } from '../core/models/theme.model';
 import { Subject, takeUntil } from 'rxjs';
 import { SubscriptionService } from '../core/services/subscription.service';
 
+/**
+ * @component
+ * @description
+ * ThemeCardComponent displays information about a single theme and provides functionality
+ * for subscribing or unsubscribing to the theme, based on the current view context.
+ * @selector app-theme-card
+ */
 @Component({
   selector: 'app-theme-card',
   templateUrl: './theme-card.component.html',
@@ -25,8 +32,15 @@ export class ThemeCardComponent implements OnDestroy {
   message: String | undefined;
   errorMessage: String = '';
 
+  /**
+   * @constructor
+   * @param {SubscriptionService} subscriptionService - The service to interact with the subscriptions data.
+   */
   constructor(private subscriptionService: SubscriptionService) {}
 
+  /**
+   * Subscribes the user to this theme and emits an event to inform parent components.
+   */
   subscribe() {
     this.destroy$ = new Subject<boolean>();
     if (this.theme) {
@@ -49,6 +63,9 @@ export class ThemeCardComponent implements OnDestroy {
     }
   }
 
+  /**
+   * Unsubscribes the user from this theme and emits an event to update parent components.
+   */
   unsubscribe() {
     this.destroy$ = new Subject<boolean>();
     if (this.theme) {

@@ -6,18 +6,29 @@ import {
 } from '@angular/common/http';
 import { Observable, catchError, of, throwError } from 'rxjs';
 import { UserResponse } from '../models/response/user-response';
-import { MessageResponse } from '../models/response/message-response';
 import { UpdateProfileResponse } from '../models/response/updateprofile-response';
 import { AuthService } from './auth.service';
 
+/**
+ * Service for managing user-related operations.
+ */
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private baseUrl = 'http://localhost:8080/user';
 
+  /**
+   * Creates an instance of UserService.
+   * @param http - The HttpClient for making HTTP requests.
+   * @param authService - The AuthService for authentication-related operations.
+   */
   constructor(private http: HttpClient, private authService: AuthService) {}
 
+  /**
+   * Retrieves the profile of the currently logged-in user.
+   * @returns An Observable representing the user's profile information.
+   */
   getProfileForCurrentUser(): Observable<UserResponse> {
     const token = localStorage.getItem('token');
 
@@ -30,6 +41,11 @@ export class UserService {
     return this.http.get<UserResponse>(`${this.baseUrl}/profile`, { headers });
   }
 
+  /**
+   * Updates the user's profile information.
+   * @param user - The updated user profile data.
+   * @returns An Observable representing the response message and token.
+   */
   updateUser(user: UserResponse): Observable<UpdateProfileResponse> {
     const token = localStorage.getItem('token');
 
@@ -50,6 +66,11 @@ export class UserService {
       );
   }
 
+  /**
+   * Handles HTTP error responses.
+   * @param error - The HTTP error response.
+   * @returns An Observable with the error message.
+   */
   private handleErrorUpdateProfil(error: HttpErrorResponse) {
     const status = error.status;
     let errorMessage;

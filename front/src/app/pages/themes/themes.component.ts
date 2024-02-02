@@ -4,6 +4,12 @@ import { ThemeService } from '../../core/services/theme.service';
 import { Theme } from '../../core/models/theme.model';
 import { SubscriptionService } from '../../core/services/subscription.service';
 
+/**
+ * @component
+ * @description
+ * ThemesComponent displays a list of available themes and allows users to manage their subscriptions.
+ * @selector app-themes.
+ */
 @Component({
   selector: 'app-themes',
   templateUrl: './themes.component.html',
@@ -15,15 +21,26 @@ export class ThemesComponent implements OnInit, OnDestroy {
   subscriptions: number[] = [];
   errorMessage: string = '';
 
+  /**
+   * @constructor
+   * @param {ThemeService} themeService - The service to interact with the theme data.
+   * @param {SubscriptionService} subscriptionService - The service to interact with the subscriptions data.
+   */
   constructor(
     private themeService: ThemeService,
     private subscriptionService: SubscriptionService
   ) {}
 
+  /**
+   * Fetches themes and subscriptions on component initialization and marks themes as subscribed/unsubscribed.
+   */
   ngOnInit(): void {
     this.getAllThemesWithSubscription();
   }
 
+  /**
+   * Fetches all themes and the current user's subscriptions, then updates each theme's subscription status.
+   */
   getAllThemesWithSubscription() {
     this.destroy$ = new Subject<boolean>();
     this.themeService
@@ -44,6 +61,9 @@ export class ThemesComponent implements OnInit, OnDestroy {
       });
   }
 
+  /**
+   * Updates each theme's subscription status based on the current user's subscriptions.
+   */
   updateSubscription(): void {
     if (this.themes && this.subscriptions) {
       this.themes.forEach((theme) => {
@@ -54,6 +74,9 @@ export class ThemesComponent implements OnInit, OnDestroy {
     }
   }
 
+  /**
+   * Re-fetches themes and subscriptions to reflect any changes in the user's subscriptions.
+   */
   onSubscriptionChange(): void {
     this.getAllThemesWithSubscription();
   }

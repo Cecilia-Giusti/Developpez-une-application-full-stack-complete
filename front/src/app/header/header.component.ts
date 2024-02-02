@@ -6,8 +6,11 @@ import { PreviousComponent } from '../previous/previous.component';
 import { CommonModule } from '@angular/common';
 
 /**
- * Represents the header component of the application.
- * @component HeaderAuthComponent
+ * @component
+ * @description
+ * HeaderComponent serves as the application's global header, incorporating navigation links,
+ * logo display, and conditional rendering of certain elements based on the current route.
+ * It's a standalone component that directly imports required Angular modules and child components.
  * @selector app-header
  */
 @Component({
@@ -24,8 +27,17 @@ import { CommonModule } from '@angular/common';
   ],
 })
 export class HeaderComponent {
+  /**
+   * @constructor
+   * @param {Router} router - The Angular Router for navigation and route detection.
+   */
   constructor(private router: Router) {}
 
+  /**
+   * Determines if the 'Previous' navigation link should be displayed.
+   * It's shown on specific routes like login, register, article listing, and article detail pages.
+   * @returns {boolean} True if the 'Previous' link should be shown, otherwise false.
+   */
   shouldShowPrevious(): boolean {
     const url = this.router.url;
     const articleIdPattern = /^\/article\/\d+$/;
@@ -38,6 +50,11 @@ export class HeaderComponent {
     );
   }
 
+  /**
+   * Determines if the main navigation bar should be displayed.
+   * It's hidden on the login, register, and root ('') routes.
+   * @returns {boolean} True if the navigation bar should be shown, otherwise false.
+   */
   shouldShowNav(): boolean {
     return (
       this.router.url !== '/login' &&
@@ -46,6 +63,10 @@ export class HeaderComponent {
     );
   }
 
+  /**
+   * Checks if the current page is an authentication-related page (login or register).
+   * @returns {boolean} True if the current route is an authentication page, otherwise false.
+   */
   isAuthPage(): boolean {
     const authRoutes = ['/', '/login', '/register'];
     return authRoutes.includes(this.router.url);
